@@ -1,0 +1,98 @@
+{
+  "baselines": [
+    "ExactUniform",
+    "Recent50Hot",
+    "PreviousDraw"
+  ],
+  "bug_policy": "Close the version, create a new version, and restart prospective counting from zero.",
+  "conditional_monte_carlo": {
+    "confidence_level": 0.95,
+    "fair_draw": "sample-6-without-replacement-from-1-to-49",
+    "plus_one_p_value": true,
+    "seed": 20260729,
+    "simulations": 1000000
+  },
+  "confirmatory_analysis_points": [
+    100,
+    200
+  ],
+  "descriptive_report_interval": 20,
+  "evidence_protocol": {
+    "confirmation_requires_pre_draw_official_status": true,
+    "confirmation_requires_remote_oid_match": true,
+    "cross_platform_probability_atol": 1e-12,
+    "prediction_commit_field": "parent_commit",
+    "prediction_event_remote_status": "PENDING_REMOTE_ANCHOR",
+    "remote_verification": "git-ls-remote",
+    "status_resolved_from_ledger_anchor_only": true,
+    "version": "remote-time-anchor-v2"
+  },
+  "experiment_id": "TW649-PROSPECTIVE-20260729-V2",
+  "experiment_version": "2.0.0",
+  "missing_draw_policy": "Only remotely confirmed pre-draw predictions are valid; missing predictions remain missing and are never backfilled.",
+  "model": {
+    "C": 0.01,
+    "ewma_alpha": 0.06,
+    "features": [
+      "long_z",
+      "recent20_z",
+      "recent50_z",
+      "recent100_z",
+      "ewma_z",
+      "gap_z",
+      "transition_z",
+      "in_last_draw"
+    ],
+    "kind": "batch_expanding_logistic_regression",
+    "long_frequency_prior_strength": 12.0,
+    "max_iter": 500,
+    "minimum_history": 30,
+    "number_encoder": "OneHotEncoder-fit-on-training-only",
+    "number_one_hot": true,
+    "numeric_scaler": "StandardScaler-fit-on-training-only",
+    "penalty": "l2",
+    "probability_projection": "capped-simplex-sum-6",
+    "random_state": 20260729,
+    "shrink_strength": 0.1,
+    "solver": "lbfgs",
+    "tie_break": "probability-descending-number-ascending",
+    "transition_alpha": 30.0
+  },
+  "model_version": "ProspectiveBatchLogistic-v1",
+  "official_correction_policy": "Append a correction event; never overwrite an earlier event.",
+  "primary_comparison": "ProspectiveBatchLogistic-v1 vs ExactUniform",
+  "primary_metrics": [
+    "brier_difference",
+    "log_loss_difference"
+  ],
+  "secondary_metrics": [
+    "hits_top6",
+    "hits_top10",
+    "hits_top12"
+  ],
+  "stages": [
+    {
+      "draws": [
+        1,
+        100
+      ],
+      "stage": 1
+    },
+    {
+      "draws": [
+        101,
+        200
+      ],
+      "stage": 2
+    }
+  ],
+  "stopping_rule": "Accumulate 100 valid draws in stage 1 and 100 new valid draws in stage 2 regardless of stage-1 outcome.",
+  "success": {
+    "consistent_improvement_20_draw_blocks_at_least": 0.6,
+    "holm_adjusted_one_sided_p_lt": 0.05,
+    "independent_replication_same_direction": true,
+    "mean_brier_difference_lt": 0.0,
+    "mean_log_loss_difference_lt": 0.0,
+    "no_leakage_or_late_prediction": true
+  }
+}

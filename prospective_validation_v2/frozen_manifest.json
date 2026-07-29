@@ -1,0 +1,29 @@
+{
+  "config_sha256": "e15410fc52406150d89c16792b317cdfc09d39d7c0d5ec411d6712c91273a00d",
+  "data_end_date": "2026-07-28",
+  "data_end_draw_id": "115000074",
+  "data_sha256_at_freeze": "b07017b0077fc458c8046aaf0370620277adcc46110928d477884e57768a972e",
+  "experiment_id": "TW649-PROSPECTIVE-20260729-V2",
+  "experiment_version": "2.0.0",
+  "first_prospective_draw": {
+    "draw_date": "2026-07-31",
+    "draw_id": "115000075"
+  },
+  "frozen_at": "2026-07-29T13:58:08+08:00",
+  "source_code_sha256": "36c21ae342e53277e0538e58cab9fd4bca7a0a03bf5719a9d0acca58c23c364a",
+  "source_files": {
+    "next_draw_predictor_audited.py": "addcb0dfd5a0db6b90d36c94a319a0c97b5e42f151652513fe4244cb4eda58ba",
+    "prospective/canonical.py": "f1d724cec283be05fa78bec4cfe26ff7109c9f20db224dc1e7553957b8980a6d",
+    "prospective/model.py": "ee0aa89ca1ee72f13daf3e9411c1313819cde656082d350eae3c2eed2cd56a2b",
+    "prospective_v2/__init__.py": "560c56ce2c3b2c1f9bdf353665a4f7380662533439ca5436981bb433994890b7",
+    "prospective_v2/config.py": "494bb498387a0552d843f9023c15f13e409269afe14aeb8b5548abb596d7cd1e",
+    "prospective_v2/export_review_bundle.py": "c89339e38a166c1c4dadce9196e491b31b2de8d8210853be1e35754975f110d2",
+    "prospective_v2/freeze_experiment.py": "6d8321f8ce3391df0bac21038e3fe8423aa194c0e4f8cdba5a354f72cf18685b",
+    "prospective_v2/official.py": "b365f6a61b478ebac1bf83ae2b5d7968c69ffa7ba14f135e2702572296209753",
+    "prospective_v2/predict_next.py": "32ac6ea785073e92903795fb208b509de9591289149d4f09e5dc2d89b1a0c29c",
+    "prospective_v2/remote.py": "8cebc322bc0f869ee4ee77d8b6f988b257df8612f9e47e98d5ed3c8eb1844b37",
+    "prospective_v2/status.py": "ce3a74bde3720b0ef4346a61edb1a9b13a6f75935718fcad230f3ba03e33e225",
+    "prospective_v2/verify_ledger.py": "19a4b2fffda717c2c07b19e64de97519326a7b76c4596b0a75f06b0148d56abd",
+    "prospective_v2/workflow.py": "a49e9b24175506eb600752cde671e993c1a245157244d50ca4032b3ffda8876e"
+  }
+}
