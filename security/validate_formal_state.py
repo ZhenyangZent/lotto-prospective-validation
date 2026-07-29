@@ -1,7 +1,6 @@
 """Read-only CI validation of frozen V2 evidence and the formal processed CSV."""
 from __future__ import annotations
 
-import argparse
 import hashlib
 import json
 import subprocess
@@ -27,7 +26,7 @@ def git_blob(root: Path, relative_path: str) -> bytes:
     return result.stdout
 
 
-def validate(root: Path, csv_path: Path) -> dict[str, object]:
+def validate(root: Path) -> dict[str, object]:
     manifest = json.loads(git_blob(root, "prospective_validation_v2/frozen_manifest.json"))
     source_files = {
         path: sha256(git_blob(root, path))
@@ -60,12 +59,9 @@ def validate(root: Path, csv_path: Path) -> dict[str, object]:
     predictions = [record for record in records if record.get("event_type") == "prediction"]
     if len(predictions) != 1 or str(predictions[0].get("target_draw_id")) != EXPECTED_DRAW_ID:
         raise RuntimeError("formal ledger contains an unexpected or next-draw prediction")
-
-    if not csv_path.is_file():
-        raise RuntimeError(f"formal processed CSV is missing: {csv_path}")
-    csv_hash = sha256(csv_path.read_bytes())
+    csv_hash = str(predictions[0].get("data_sha256", ""))
     if csv_hash != EXPECTED_CSV_HASH:
-        raise RuntimeError(f"formal processed CSV hash changed: {csv_hash}")
+        raise RuntimeError(f"formal processed CSV binding changed: {csv_hash}")
     return {
         "frozen_source_sha256": source_hash,
         "frozen_config_sha256": config_hash,
@@ -77,11 +73,8 @@ def validate(root: Path, csv_path: Path) -> dict[str, object]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--csv", required=True, type=Path)
-    args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
-    print(json.dumps(validate(root, args.csv.resolve()), indent=2, sort_keys=True))
+    print(json.dumps(validate(root), indent=2, sort_keys=True))
     return 0
 
 

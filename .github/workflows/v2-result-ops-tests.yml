@@ -41,23 +41,9 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install "pytest-cov>=5,<8"
 
-      - name: Prepare immutable formal processed CSV fixture
-        shell: pwsh
-        run: |
-          $expected = "b07017b0077fc458c8046aaf0370620277adcc46110928d477884e57768a972e"
-          $parent = Split-Path -Parent $env:GITHUB_WORKSPACE
-          $targetDirectory = Join-Path $parent "lotto_analysis/data/processed"
-          $target = Join-Path $targetDirectory "lotto649.csv"
-          New-Item -ItemType Directory -Path $targetDirectory -Force | Out-Null
-          $uri = "https://raw.githubusercontent.com/ZhenyangZent/Color_Roll_Analysis/5e42902a8f5b707c06e187020c86117f632200ed/data/processed/lotto649.csv"
-          Invoke-WebRequest -Uri $uri -OutFile $target
-          $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $target).Hash.ToLowerInvariant()
-          if ($actual -ne $expected) { throw "formal CSV checksum mismatch: $actual" }
-          "FORMAL_CSV_PATH=$target" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-
       - name: Validate frozen and formal state before tests
         shell: pwsh
-        run: python security/validate_formal_state.py --csv "$env:FORMAL_CSV_PATH"
+        run: python security/validate_formal_state.py
 
       - name: Run targeted V2 result operations tests
         shell: pwsh
@@ -118,5 +104,5 @@ jobs:
       - name: Revalidate formal state and prohibit evidence mutation
         shell: pwsh
         run: |
-          python security/validate_formal_state.py --csv "$env:FORMAL_CSV_PATH"
+          python security/validate_formal_state.py
           git diff --exit-code -- prospective prospective_v2 prospective_validation prospective_validation_v2

@@ -119,8 +119,36 @@ def append_result_and_anchor(tmp_path: Path) -> tuple[Path, Path, Path, dict, li
 def write_csv(path: Path, row: str | None = None) -> bytes:
     header = "draw_id,draw_date,number_1,number_2,number_3,number_4,number_5,number_6,special_number,source,source_version\n"
     body = row or "115000074,2026-07-28,2,9,16,23,30,37,44,official,seed\n"
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(header + body, encoding="utf-8")
     return path.read_bytes()
+
+
+def mock_formal_inputs(tmp_path: Path) -> tuple[Path, Path]:
+    """Build isolated mock evidence and CSV inputs for destructive dry-runs."""
+    formal = tmp_path / "mock-formal"
+    ledger = formal / "prospective_validation_v2" / "ledger.jsonl"
+    head = formal / "prospective_validation_v2" / "ledger_head.json"
+    operational = tmp_path / "mock-operational" / "lotto649.csv"
+    csv_bytes = write_csv(operational)
+    initialize_ledger(ledger, head)
+    prediction = prediction_event()
+    prediction.update({
+        "data_sha256": hashlib.sha256(csv_bytes).hexdigest(),
+        "data_end_draw_id": "115000074",
+    })
+    prediction = append_record(ledger, head, prediction)
+    append_record(ledger, head, {
+        "event_type": "remote_anchor", "event_id": "mock-prediction-anchor",
+        "experiment_id": EXPERIMENT_ID, "experiment_version": EXPERIMENT_VERSION,
+        "prediction_id": prediction["prediction_id"],
+        "prediction_record_hash": prediction["record_hash"],
+        "prediction_commit": "a" * 40, "remote_ref_oid": "a" * 40,
+        "remote_name": "origin", "remote_branch": "main",
+        "verified_before_draw": True,
+        "official_draw_status_at_verification": "NOT_ANNOUNCED",
+    })
+    return formal, operational
 
 
 def init_git_remote(tmp_path: Path) -> tuple[Path, Path]:
@@ -340,9 +368,10 @@ def test_26_complete_cycle_stops_at_first_failure():
 
 def test_27_dry_run_uses_real_git_without_changing_unrelated_remote(tmp_path):
     repo, _ = init_git_remote(tmp_path)
+    formal, operational = mock_formal_inputs(tmp_path)
     before = git(repo, "ls-remote", "origin", "refs/heads/main")
-    result = run_dry_run(draw_id="115000075", live_root=repo, formal_source_root=ROOT,
-                         operational_csv_path=ROOT.parent / "lotto_analysis" / "data" / "processed" / "lotto649.csv",
+    result = run_dry_run(draw_id="115000075", live_root=repo, formal_source_root=formal,
+                         operational_csv_path=operational,
                          public_ref="main")
     after = git(repo, "ls-remote", "origin", "refs/heads/main")
     assert result["passed"] and result["sequence"] == ["prediction", "prediction_anchor", "result", "result_anchor", "csv", "next_prediction", "next_prediction_anchor"]
@@ -354,19 +383,20 @@ def test_27_dry_run_uses_real_git_without_changing_unrelated_remote(tmp_path):
 def test_28_frozen_sources_config_ledger_and_formal_csv_are_unchanged(tmp_path):
     tracked = [*SOURCE_FILES, "prospective_validation_v2/frozen_config.json",
                "prospective_validation_v2/ledger.jsonl", "prospective_validation_v2/ledger_head.json",
-               "data/processed/lotto649.csv"]
+               "prospective_validation_v2/frozen_manifest.json"]
     before = repository_fingerprint(ROOT, tracked)
     mirror, _ = init_git_remote(tmp_path)
-    operational = ROOT.parent / "lotto_analysis" / "data" / "processed" / "lotto649.csv"
+    formal, operational = mock_formal_inputs(tmp_path)
     operational_before = sha256_file(operational)
-    result = run_dry_run(draw_id="115000075", live_root=mirror, formal_source_root=ROOT,
+    mock_ledger_before = sha256_file(formal / "prospective_validation_v2" / "ledger.jsonl")
+    result = run_dry_run(draw_id="115000075", live_root=mirror, formal_source_root=formal,
                          operational_csv_path=operational, public_ref="main")
     after = repository_fingerprint(ROOT, tracked)
     assert before == after
     assert result["formal_state_unchanged"]
     assert before["prospective_validation_v2/ledger.jsonl"] is not None
     assert sha256_file(operational) == operational_before
-    assert result["copied_formal_ledger_sha256"] == before["prospective_validation_v2/ledger.jsonl"]
+    assert result["copied_formal_ledger_sha256"] == mock_ledger_before
     assert all(not path.startswith("prospective_ops_v2/") for path in SOURCE_FILES)
 
 
@@ -724,9 +754,10 @@ def test_64_second_complete_run_is_idempotent():
 
 def test_65_dry_run_faults_and_recovers_every_mutation_boundary(tmp_path):
     repo, _ = init_git_remote(tmp_path)
+    formal, operational = mock_formal_inputs(tmp_path)
     result = run_dry_run(
-        draw_id="115000075", live_root=repo, formal_source_root=ROOT,
-        operational_csv_path=ROOT.parent / "lotto_analysis" / "data" / "processed" / "lotto649.csv",
+        draw_id="115000075", live_root=repo, formal_source_root=formal,
+        operational_csv_path=operational,
         public_ref="main",
     )
     matrix = result["failure_recovery"]
