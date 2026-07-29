@@ -46,7 +46,8 @@ print(verify_ledger("ledger.jsonl", "ledger_head.json"))
 '''
 
 REPRODUCE_PS1 = r'''$ErrorActionPreference='Stop'
-python -m venv .venv
+if (Get-Command py -ErrorAction SilentlyContinue) { py -3 -m venv .venv }
+else { python -m venv .venv }
 if ($LASTEXITCODE -ne 0) { throw 'venv creation failed' }
 if (Test-Path '.\.venv\Scripts\python.exe') { $bundlePython = '.\.venv\Scripts\python.exe' }
 elseif (Test-Path '.\.venv\bin\python.exe') { $bundlePython = '.\.venv\bin\python.exe' }
