@@ -1,0 +1,17 @@
+{
+  "anchor_commit": "1d23983a236e0eb832ff69f8d07f643d095ed47a",
+  "current_remote_ref_oid": "1d23983a236e0eb832ff69f8d07f643d095ed47a",
+  "git_bundle_verify_passed": true,
+  "github_api_commit_sha": "c86591159f4d7cbca1f8765f7b06dea80b2f571a",
+  "github_commit_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/commit/c86591159f4d7cbca1f8765f7b06dea80b2f571a",
+  "prediction_commit": "c86591159f4d7cbca1f8765f7b06dea80b2f571a",
+  "prediction_commit_api_verified": true,
+  "prediction_remote_ref_oid_at_anchor": "c86591159f4d7cbca1f8765f7b06dea80b2f571a",
+  "queried_at": "2026-07-29T14:02:05+08:00",
+  "remote_branch": "master",
+  "remote_repository": "https://github.com/ZhenyangZent/lotto-prospective-validation.git",
+  "verification_method": [
+    "git-ls-remote",
+    "GitHub REST API"
+  ]
+}

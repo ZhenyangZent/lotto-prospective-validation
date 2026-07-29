@@ -1,0 +1,2 @@
+origin	https://github.com/ZhenyangZent/lotto-prospective-validation.git (fetch)
+origin	https://github.com/ZhenyangZent/lotto-prospective-validation.git (push)

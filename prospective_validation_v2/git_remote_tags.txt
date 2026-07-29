@@ -1,0 +1,6 @@
+e6a4922d0000a43d8764452457f2ebaf3d14157c	refs/tags/lotto-prospective-v1-closed-invalid-remote-anchor
+50ebedb45fc8876dbe1d0e96dae91a88e94b690c	refs/tags/lotto-prospective-v1-closed-invalid-remote-anchor^{}
+78682a1e0e5a9dc81e439bd084a720b6e28feee4	refs/tags/lotto-prospective-v1-preregistered
+f0547e07f13367fc4c8c1aa60d2a5673b5dc3b9a	refs/tags/lotto-prospective-v1-preregistered^{}
+3010954b87ef05a36e808ee633bfa892244d2383	refs/tags/lotto-prospective-v2-preregistered
+060645753623dd048ef4edb937fdcbdcdf054a0f	refs/tags/lotto-prospective-v2-preregistered^{}

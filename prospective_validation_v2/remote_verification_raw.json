@@ -1,0 +1,161 @@
+{
+  "author": {
+    "avatar_url": "https://avatars.githubusercontent.com/u/163997336?v=4",
+    "events_url": "https://api.github.com/users/ZhenyangZent/events{/privacy}",
+    "followers_url": "https://api.github.com/users/ZhenyangZent/followers",
+    "following_url": "https://api.github.com/users/ZhenyangZent/following{/other_user}",
+    "gists_url": "https://api.github.com/users/ZhenyangZent/gists{/gist_id}",
+    "gravatar_id": "",
+    "html_url": "https://github.com/ZhenyangZent",
+    "id": 163997336,
+    "login": "ZhenyangZent",
+    "node_id": "U_kgDOCcZmmA",
+    "organizations_url": "https://api.github.com/users/ZhenyangZent/orgs",
+    "received_events_url": "https://api.github.com/users/ZhenyangZent/received_events",
+    "repos_url": "https://api.github.com/users/ZhenyangZent/repos",
+    "site_admin": false,
+    "starred_url": "https://api.github.com/users/ZhenyangZent/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/ZhenyangZent/subscriptions",
+    "type": "User",
+    "url": "https://api.github.com/users/ZhenyangZent",
+    "user_view_type": "public"
+  },
+  "comments_url": "https://api.github.com/repos/ZhenyangZent/lotto-prospective-validation/commits/c86591159f4d7cbca1f8765f7b06dea80b2f571a/comments",
+  "commit": {
+    "author": {
+      "date": "2026-07-29T06:00:13Z",
+      "email": "zhenyangzent@gmail.com",
+      "name": "ZhenyangZent"
+    },
+    "comment_count": 0,
+    "committer": {
+      "date": "2026-07-29T06:00:13Z",
+      "email": "zhenyangzent@gmail.com",
+      "name": "ZhenyangZent"
+    },
+    "message": "prospective-v2: prediction for draw 115000075",
+    "tree": {
+      "sha": "eb4771f6be10843500a69eaa98e830e43ddb6340",
+      "url": "https://api.github.com/repos/ZhenyangZent/lotto-prospective-validation/git/trees/eb4771f6be10843500a69eaa98e830e43ddb6340"
+    },
+    "url": "https://api.github.com/repos/ZhenyangZent/lotto-prospective-validation/git/commits/c86591159f4d7cbca1f8765f7b06dea80b2f571a",
+    "verification": {
+      "payload": null,
+      "reason": "unsigned",
+      "signature": null,
+      "verified": false,
+      "verified_at": null
+    }
+  },
+  "committer": {
+    "avatar_url": "https://avatars.githubusercontent.com/u/163997336?v=4",
+    "events_url": "https://api.github.com/users/ZhenyangZent/events{/privacy}",
+    "followers_url": "https://api.github.com/users/ZhenyangZent/followers",
+    "following_url": "https://api.github.com/users/ZhenyangZent/following{/other_user}",
+    "gists_url": "https://api.github.com/users/ZhenyangZent/gists{/gist_id}",
+    "gravatar_id": "",
+    "html_url": "https://github.com/ZhenyangZent",
+    "id": 163997336,
+    "login": "ZhenyangZent",
+    "node_id": "U_kgDOCcZmmA",
+    "organizations_url": "https://api.github.com/users/ZhenyangZent/orgs",
+    "received_events_url": "https://api.github.com/users/ZhenyangZent/received_events",
+    "repos_url": "https://api.github.com/users/ZhenyangZent/repos",
+    "site_admin": false,
+    "starred_url": "https://api.github.com/users/ZhenyangZent/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/ZhenyangZent/subscriptions",
+    "type": "User",
+    "url": "https://api.github.com/users/ZhenyangZent",
+    "user_view_type": "public"
+  },
+  "files": [
+    {
+      "additions": 1,
+      "blob_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/blob/c86591159f4d7cbca1f8765f7b06dea80b2f571a/prospective_validation_v2%2Fledger.jsonl",
+      "changes": 1,
+      "contents_url": "https://api.github.com/repos/ZhenyangZent/lotto-prospective-validation/contents/prospective_validation_v2%2Fledger.jsonl?ref=c86591159f4d7cbca1f8765f7b06dea80b2f571a",
+      "deletions": 0,
+      "filename": "prospective_validation_v2/ledger.jsonl",
+      "patch": "@@ -0,0 +1 @@\n+{\"config_sha256\":\"e15410fc52406150d89c16792b317cdfc09d39d7c0d5ec411d6712c91273a00d\",\"data_end_date\":\"2026-07-28\",\"data_end_draw_id\":\"115000074\",\"data_sha256\":\"b07017b0077fc458c8046aaf0370620277adcc46110928d477884e57768a972e\",\"event_id\":\"4a338176-9c3b-45ea-9a2d-6bef36cd4bab\",\"event_type\":\"prediction\",\"experiment_id\":\"TW649-PROSPECTIVE-20260729-V2\",\"experiment_version\":\"2.0.0\",\"late_prediction\":false,\"model_version\":\"ProspectiveBatchLogistic-v1\",\"official_draw_status_at_prediction\":\"NOT_ANNOUNCED\",\"official_precheck_metadata\":\"official-precheck-115000075-20260729T140005+0800.json\",\"official_precheck_raw\":\"official-precheck-115000075-20260729T140005+0800.raw\",\"official_precheck_raw_sha256\":\"96c3e9cc3fad77164528f5e218548dd7ebe5f6b776423d78375df3f169073fc3\",\"parent_commit\":\"060645753623dd048ef4edb937fdcbdcdf054a0f\",\"prediction_created_at\":\"2026-07-29T14:00:13+08:00\",\"prediction_id\":\"TW649-PROSPECTIVE-20260729-V2-115000075\",\"prediction_payload_sha256\":\"15997103145f1913a6bf1e8f23860effa7285bef42387526ad9c410706d09a05\",\"previous_record_hash\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"probabilities_1_to_49\":[0.1270946056886915,0.12254679822918071,0.11912830320090026,0.12463532438016803,0.12664907459756233,0.12037331398902226,0.12482863941102043,0.12127483238556253,0.12216642282284965,0.12289444329631857,0.12210116139676291,0.12295209839855392,0.12040861163714348,0.12089122940001812,0.1207299030157683,0.1229060766785427,0.11928246170508577,0.12129105320144301,0.12044909556465272,0.12094478197956776,0.12208101428385545,0.129167016827182,0.12602677139040852,0.12213621377296288,0.12407307845079482,0.12029669629686185,0.12269698835990805,0.12806682573828093,0.11772801262913316,0.11784463671491538,0.12283346328909922,0.12311158698141869,0.11934913698937144,0.11781348239999012,0.11956923276269701,0.12313811774886826,0.12134559145911741,0.12558044199040072,0.12336117179739672,0.12579560894678732,0.11846609075421086,0.12216691553242176,0.12863793356142847,0.12310630146583207,0.12406992593035515,0.11711521036906566,0.12646151633882258,0.12409490382162469,0.12031788241797295],\"probability_sum\":6.0,\"random_seed\":20260729,\"record_hash\":\"b0b156084043769bc36d0aded3dadee49f209e8047b532220857f69d6f242b5a\",\"remote_commit_confirmed\":false,\"remote_status\":\"PENDING_REMOTE_ANCHOR\",\"sequence\":1,\"source_code_sha256\":\"36c21ae342e53277e0538e58cab9fd4bca7a0a03bf5719a9d0acca58c23c364a\",\"target_draw_date\":\"2026-07-31\",\"target_draw_id\":\"115000075\",\"timezone\":\"Asia/Taipei\",\"top10\":[22,43,28,1,5,47,23,40,38,7],\"top12\":[22,43,28,1,5,47,23,40,38,7,4,48],\"top6\":[22,43,28,1,5,47]}",
+      "raw_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/raw/c86591159f4d7cbca1f8765f7b06dea80b2f571a/prospective_validation_v2%2Fledger.jsonl",
+      "sha": "f9693d1eed151de223fbc738314b5cec074353ec",
+      "status": "modified"
+    },
+    {
+      "additions": 1,
+      "blob_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/blob/c86591159f4d7cbca1f8765f7b06dea80b2f571a/prospective_validation_v2%2Fledger_head.json",
+      "changes": 2,
+      "contents_url": "https://api.github.com/repos/ZhenyangZent/lotto-prospective-validation/contents/prospective_validation_v2%2Fledger_head.json?ref=c86591159f4d7cbca1f8765f7b06dea80b2f571a",
+      "deletions": 1,
+      "filename": "prospective_validation_v2/ledger_head.json",
+      "patch": "@@ -1 +1 @@\n-{\"record_count\": 0, \"record_hash\": \"0000000000000000000000000000000000000000000000000000000000000000\"}\n\\ No newline at end of file\n+{\"record_count\": 1, \"record_hash\": \"b0b156084043769bc36d0aded3dadee49f209e8047b532220857f69d6f242b5a\"}\n\\ No newline at end of file",
+      "raw_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/raw/c86591159f4d7cbca1f8765f7b06dea80b2f571a/prospective_validation_v2%2Fledger_head.json",
+      "sha": "5bc2ed052b396f8cb7246d5d0a60c520a6867933",
+      "status": "modified"
+    },
+    {
+      "additions": 36,
+      "blob_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/blob/c86591159f4d7cbca1f8765f7b06dea80b2f571a/prospective_validation_v2%2Fofficial_prechecks%2Fofficial-precheck-115000075-20260729T140005%2B0800.json",
+      "changes": 36,
+      "contents_url": "https://api.github.com/repos/ZhenyangZent/lotto-prospective-validation/contents/prospective_validation_v2%2Fofficial_prechecks%2Fofficial-precheck-115000075-20260729T140005%2B0800.json?ref=c86591159f4d7cbca1f8765f7b06dea80b2f571a",
+      "deletions": 0,
+      "filename": "prospective_validation_v2/official_prechecks/official-precheck-115000075-20260729T140005+0800.json",
+      "patch": "@@ -0,0 +1,36 @@\n+{\n+  \"http_retrieved_at\": \"2026-07-29T14:00:05+08:00\",\n+  \"http_status\": 200,\n+  \"parsed_result\": null,\n+  \"raw_response_file\": \"official-precheck-115000075-20260729T140005+0800.raw\",\n+  \"raw_response_sha256\": \"96c3e9cc3fad77164528f5e218548dd7ebe5f6b776423d78375df3f169073fc3\",\n+  \"request_endpoint\": \"https://api.taiwanlottery.com/TLCAPIWeB/Lottery/Lotto649Result\",\n+  \"request_params\": {\n+    \"pageNum\": 1,\n+    \"pageSize\": 10,\n+    \"period\": \"115000075\"\n+  },\n+  \"request_url\": \"https://api.taiwanlottery.com/TLCAPIWeB/Lottery/Lotto649Result?period=115000075&pageNum=1&pageSize=10\",\n+  \"response_headers\": {\n+    \"Cache-Control\": \"no-store,no-cache,no-store\",\n+    \"Connection\": \"keep-alive\",\n+    \"Content-Encoding\": \"gzip\",\n+    \"Content-Security-Policy\": \"frame-ancestors 'self';\",\n+    \"Content-Type\": \"application/json; charset=utf-8\",\n+    \"Date\": \"Wed, 29 Jul 2026 06:00:11 GMT\",\n+    \"Permissions-Policy\": \"fullscreen=(), geolocation=()\",\n+    \"Pragma\": \"no-cache,no-cache\",\n+    \"Referrer-Policy\": \"no-referrer\",\n+    \"Server\": \"HiNetCDN\",\n+    \"Strict-Transport-Security\": \"max-age=31536000; includeSubDomains; preload\",\n+    \"Transfer-Encoding\": \"chunked\",\n+    \"Vary\": \"Accept-Encoding\",\n+    \"X-Cache\": \"MISS, MISS, EXPIRED\",\n+    \"X-Content-Type-Options\": \"nosniff\",\n+    \"X-Frame-Options\": \"SAMEORIGIN\",\n+    \"access-control-allow-origin\": \"*\",\n+    \"x-request-id\": \"1b6004a48079e6eec524cd6dfbfa40d9\"\n+  },\n+  \"target_draw_id\": \"115000075\",\n+  \"target_draw_status\": \"NOT_ANNOUNCED\"\n+}",
+      "raw_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/raw/c86591159f4d7cbca1f8765f7b06dea80b2f571a/prospective_validation_v2%2Fofficial_prechecks%2Fofficial-precheck-115000075-20260729T140005%2B0800.json",
+      "sha": "e797d01a76e9b36f4e5ce5f86043650db09afd61",
+      "status": "added"
+    },
+    {
+      "additions": 1,
+      "blob_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/blob/c86591159f4d7cbca1f8765f7b06dea80b2f571a/prospective_validation_v2%2Fofficial_prechecks%2Fofficial-precheck-115000075-20260729T140005%2B0800.raw",
+      "changes": 1,
+      "contents_url": "https://api.github.com/repos/ZhenyangZent/lotto-prospective-validation/contents/prospective_validation_v2%2Fofficial_prechecks%2Fofficial-precheck-115000075-20260729T140005%2B0800.raw?ref=c86591159f4d7cbca1f8765f7b06dea80b2f571a",
+      "deletions": 0,
+      "filename": "prospective_validation_v2/official_prechecks/official-precheck-115000075-20260729T140005+0800.raw",
+      "patch": "@@ -0,0 +1 @@\n+{\"rtCode\":0,\"rtMsg\":null,\"content\":{\"totalSize\":0,\"lotto649Res\":[]}}\n\\ No newline at end of file",
+      "raw_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/raw/c86591159f4d7cbca1f8765f7b06dea80b2f571a/prospective_validation_v2%2Fofficial_prechecks%2Fofficial-precheck-115000075-20260729T140005%2B0800.raw",
+      "sha": "80f26b719838487192cd81d12311f7be68fd7c12",
+      "status": "added"
+    },
+    {
+      "additions": 50,
+      "blob_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/blob/c86591159f4d7cbca1f8765f7b06dea80b2f571a/prospective_validation_v2%2Fpredictions%2Fprediction-115000075-probabilities.csv",
+      "changes": 50,
+      "contents_url": "https://api.github.com/repos/ZhenyangZent/lotto-prospective-validation/contents/prospective_validation_v2%2Fpredictions%2Fprediction-115000075-probabilities.csv?ref=c86591159f4d7cbca1f8765f7b06dea80b2f571a",
+      "deletions": 0,
+      "filename": "prospective_validation_v2/predictions/prediction-115000075-probabilities.csv",
+      "patch": "@@ -0,0 +1,50 @@\n+﻿number,probability,rank,is_top6\n+1,0.12709460568869149,4,True\n+2,0.12254679822918071,24,False\n+3,0.11912830320090026,44,False\n+4,0.12463532438016803,11,False\n+5,0.12664907459756233,5,True\n+6,0.12037331398902226,38,False\n+7,0.12482863941102043,10,False\n+8,0.12127483238556253,32,False\n+9,0.12216642282284965,26,False\n+10,0.12289444329631857,21,False\n+11,0.12210116139676291,28,False\n+12,0.12295209839855392,19,False\n+13,0.12040861163714348,37,False\n+14,0.12089122940001812,34,False\n+15,0.1207299030157683,35,False\n+16,0.1229060766785427,20,False\n+17,0.11928246170508577,43,False\n+18,0.12129105320144301,31,False\n+19,0.12044909556465272,36,False\n+20,0.12094478197956776,33,False\n+21,0.12208101428385545,29,False\n+22,0.12916701682718201,1,True\n+23,0.12602677139040852,7,False\n+24,0.12213621377296288,27,False\n+25,0.12407307845079482,13,False\n+26,0.12029669629686185,40,False\n+27,0.12269698835990805,23,False\n+28,0.12806682573828093,3,True\n+29,0.11772801262913316,48,False\n+30,0.11784463671491538,46,False\n+31,0.12283346328909922,22,False\n+32,0.12311158698141869,17,False\n+33,0.11934913698937144,42,False\n+34,0.11781348239999012,47,False\n+35,0.11956923276269701,41,False\n+36,0.12313811774886826,16,False\n+37,0.12134559145911741,30,False\n+38,0.12558044199040072,9,False\n+39,0.12336117179739672,15,False\n+40,0.12579560894678732,8,False\n+41,0.11846609075421086,45,False\n+42,0.12216691553242176,25,False\n+43,0.12863793356142847,2,True\n+44,0.12310630146583207,18,False\n+45,0.12406992593035515,14,False\n+46,0.11711521036906566,49,False\n+47,0.12646151633882258,6,True\n+48,0.12409490382162469,12,False\n+49,0.12031788241797295,39,False",
+      "raw_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/raw/c86591159f4d7cbca1f8765f7b06dea80b2f571a/prospective_validation_v2%2Fpredictions%2Fprediction-115000075-probabilities.csv",
+      "sha": "d0be05fd29a63980d9a9d09388b4b3b2e4e224ab",
+      "status": "added"
+    },
+    {
+      "additions": 116,
+      "blob_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/blob/c86591159f4d7cbca1f8765f7b06dea80b2f571a/prospective_validation_v2%2Fpredictions%2Fprediction-115000075.json",
+      "changes": 116,
+      "contents_url": "https://api.github.com/repos/ZhenyangZent/lotto-prospective-validation/contents/prospective_validation_v2%2Fpredictions%2Fprediction-115000075.json?ref=c86591159f4d7cbca1f8765f7b06dea80b2f571a",
+      "deletions": 0,
+      "filename": "prospective_validation_v2/predictions/prediction-115000075.json",
+      "patch": "@@ -0,0 +1,116 @@\n+{\n+  \"config_sha256\": \"e15410fc52406150d89c16792b317cdfc09d39d7c0d5ec411d6712c91273a00d\",\n+  \"data_end_date\": \"2026-07-28\",\n+  \"data_end_draw_id\": \"115000074\",\n+  \"data_sha256\": \"b07017b0077fc458c8046aaf0370620277adcc46110928d477884e57768a972e\",\n+  \"event_id\": \"4a338176-9c3b-45ea-9a2d-6bef36cd4bab\",\n+  \"event_type\": \"prediction\",\n+  \"experiment_id\": \"TW649-PROSPECTIVE-20260729-V2\",\n+  \"experiment_version\": \"2.0.0\",\n+  \"late_prediction\": false,\n+  \"model_version\": \"ProspectiveBatchLogistic-v1\",\n+  \"official_draw_status_at_prediction\": \"NOT_ANNOUNCED\",\n+  \"official_precheck_metadata\": \"official-precheck-115000075-20260729T140005+0800.json\",\n+  \"official_precheck_raw\": \"official-precheck-115000075-20260729T140005+0800.raw\",\n+  \"official_precheck_raw_sha256\": \"96c3e9cc3fad77164528f5e218548dd7ebe5f6b776423d78375df3f169073fc3\",\n+  \"parent_commit\": \"060645753623dd048ef4edb937fdcbdcdf054a0f\",\n+  \"prediction_created_at\": \"2026-07-29T14:00:13+08:00\",\n+  \"prediction_id\": \"TW649-PROSPECTIVE-20260729-V2-115000075\",\n+  \"prediction_payload_sha256\": \"15997103145f1913a6bf1e8f23860effa7285bef42387526ad9c410706d09a05\",\n+  \"previous_record_hash\": \"0000000000000000000000000000000000000000000000000000000000000000\",\n+  \"probabilities_1_to_49\": [\n+    0.1270946056886915,\n+    0.12254679822918071,\n+    0.11912830320090026,\n+    0.12463532438016803,\n+    0.12664907459756233,\n+    0.12037331398902226,\n+    0.12482863941102043,\n+    0.12127483238556253,\n+    0.12216642282284965,\n+    0.12289444329631857,\n+    0.12210116139676291,\n+    0.12295209839855392,\n+    0.12040861163714348,\n+    0.12089122940001812,\n+    0.1207299030157683,\n+    0.1229060766785427,\n+    0.11928246170508577,\n+    0.12129105320144301,\n+    0.12044909556465272,\n+    0.12094478197956776,\n+    0.12208101428385545,\n+    0.129167016827182,\n+    0.12602677139040852,\n+    0.12213621377296288,\n+    0.12407307845079482,\n+    0.12029669629686185,\n+    0.12269698835990805,\n+    0.12806682573828093,\n+    0.11772801262913316,\n+    0.11784463671491538,\n+    0.12283346328909922,\n+    0.12311158698141869,\n+    0.11934913698937144,\n+    0.11781348239999012,\n+    0.11956923276269701,\n+    0.12313811774886826,\n+    0.12134559145911741,\n+    0.12558044199040072,\n+    0.12336117179739672,\n+    0.12579560894678732,\n+    0.11846609075421086,\n+    0.12216691553242176,\n+    0.12863793356142847,\n+    0.12310630146583207,\n+    0.12406992593035515,\n+    0.11711521036906566,\n+    0.12646151633882258,\n+    0.12409490382162469,\n+    0.12031788241797295\n+  ],\n+  \"probability_sum\": 6.0,\n+  \"random_seed\": 20260729,\n+  \"record_hash\": \"b0b156084043769bc36d0aded3dadee49f209e8047b532220857f69d6f242b5a\",\n+  \"remote_commit_confirmed\": false,\n+  \"remote_status\": \"PENDING_REMOTE_ANCHOR\",\n+  \"sequence\": 1,\n+  \"source_code_sha256\": \"36c21ae342e53277e0538e58cab9fd4bca7a0a03bf5719a9d0acca58c23c364a\",\n+  \"target_draw_date\": \"2026-07-31\",\n+  \"target_draw_id\": \"115000075\",\n+  \"timezone\": \"Asia/Taipei\",\n+  \"top10\": [\n+    22,\n+    43,\n+    28,\n+    1,\n+    5,\n+    47,\n+    23,\n+    40,\n+    38,\n+    7\n+  ],\n+  \"top12\": [\n+    22,\n+    43,\n+    28,\n+    1,\n+    5,\n+    47,\n+    23,\n+    40,\n+    38,\n+    7,\n+    4,\n+    48\n+  ],\n+  \"top6\": [\n+    22,\n+    43,\n+    28,\n+    1,\n+    5,\n+    47\n+  ]\n+}",
+      "raw_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/raw/c86591159f4d7cbca1f8765f7b06dea80b2f571a/prospective_validation_v2%2Fpredictions%2Fprediction-115000075.json",
+      "sha": "84a5999f3ae69dbce363c7b3d47204a51457422c",
+      "status": "added"
+    }
+  ],
+  "html_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/commit/c86591159f4d7cbca1f8765f7b06dea80b2f571a",
+  "node_id": "C_kwDOTmyjKdoAKGM4NjU5MTE1OWY0ZDdjYmNhMWY4NzY1ZjdiMDZkZWE4MGIyZjU3MWE",
+  "parents": [
+    {
+      "html_url": "https://github.com/ZhenyangZent/lotto-prospective-validation/commit/060645753623dd048ef4edb937fdcbdcdf054a0f",
+      "sha": "060645753623dd048ef4edb937fdcbdcdf054a0f",
+      "url": "https://api.github.com/repos/ZhenyangZent/lotto-prospective-validation/commits/060645753623dd048ef4edb937fdcbdcdf054a0f"
+    }
+  ],
+  "sha": "c86591159f4d7cbca1f8765f7b06dea80b2f571a",
+  "stats": {
+    "additions": 205,
+    "deletions": 1,
+    "total": 206
+  },
+  "url": "https://api.github.com/repos/ZhenyangZent/lotto-prospective-validation/commits/c86591159f4d7cbca1f8765f7b06dea80b2f571a"
+}

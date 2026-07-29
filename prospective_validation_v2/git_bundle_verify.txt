@@ -1,0 +1,10 @@
+The bundle contains these 6 refs:
+1d23983a236e0eb832ff69f8d07f643d095ed47a refs/heads/master
+1d23983a236e0eb832ff69f8d07f643d095ed47a refs/remotes/origin/master
+e6a4922d0000a43d8764452457f2ebaf3d14157c refs/tags/lotto-prospective-v1-closed-invalid-remote-anchor
+78682a1e0e5a9dc81e439bd084a720b6e28feee4 refs/tags/lotto-prospective-v1-preregistered
+3010954b87ef05a36e808ee633bfa892244d2383 refs/tags/lotto-prospective-v2-preregistered
+1d23983a236e0eb832ff69f8d07f643d095ed47a HEAD
+The bundle records a complete history.
+The bundle uses this hash algorithm: sha1
+C:/Users/zheny/Music/University/program/彩卷分析/lotto_analysis/prospective_validation_v2/prospective-v2-history.bundle is okay

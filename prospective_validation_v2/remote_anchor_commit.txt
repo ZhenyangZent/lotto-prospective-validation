@@ -1,0 +1,14 @@
+commit 1d23983a236e0eb832ff69f8d07f643d095ed47a
+Author:     ZhenyangZent <zhenyangzent@gmail.com>
+AuthorDate: Wed Jul 29 14:00:24 2026 +0800
+Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+CommitDate: Wed Jul 29 14:00:24 2026 +0800
+
+    prospective-v2: anchor prediction for draw 115000075
+
+ prospective_validation_v2/ledger.jsonl             |  1 +
+ prospective_validation_v2/ledger_head.json         |  2 +-
+ ...al-precheck-115000075-20260729T140021+0800.json | 36 ++++++++++++++++++++++
+ ...ial-precheck-115000075-20260729T140021+0800.raw |  1 +
+ .../predictions/remote-anchor-115000075.json       | 26 ++++++++++++++++
+ 5 files changed, 65 insertions(+), 1 deletion(-)

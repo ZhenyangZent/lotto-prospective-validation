@@ -1,0 +1,103 @@
+* commit 1d23983a236e0eb832ff69f8d07f643d095ed47a (HEAD -> master, origin/master)
+| Author:     ZhenyangZent <zhenyangzent@gmail.com>
+| AuthorDate: Wed Jul 29 14:00:24 2026 +0800
+| Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+| CommitDate: Wed Jul 29 14:00:24 2026 +0800
+| 
+|     prospective-v2: anchor prediction for draw 115000075
+| 
+* commit c86591159f4d7cbca1f8765f7b06dea80b2f571a
+| Author:     ZhenyangZent <zhenyangzent@gmail.com>
+| AuthorDate: Wed Jul 29 14:00:13 2026 +0800
+| Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+| CommitDate: Wed Jul 29 14:00:13 2026 +0800
+| 
+|     prospective-v2: prediction for draw 115000075
+| 
+* commit 060645753623dd048ef4edb937fdcbdcdf054a0f (tag: lotto-prospective-v2-preregistered)
+| Author:     ZhenyangZent <zhenyangzent@gmail.com>
+| AuthorDate: Wed Jul 29 13:58:21 2026 +0800
+| Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+| CommitDate: Wed Jul 29 13:58:21 2026 +0800
+| 
+|     chore: preregister prospective V2 remote anchor protocol
+| 
+* commit a5a76ee7d6ab0eadbe114aed2a34a6593c181f20
+| Author:     ZhenyangZent <zhenyangzent@gmail.com>
+| AuthorDate: Wed Jul 29 13:57:05 2026 +0800
+| Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+| CommitDate: Wed Jul 29 13:57:05 2026 +0800
+| 
+|     feat: add V2 verifiable remote time anchors
+| 
+* commit 50ebedb45fc8876dbe1d0e96dae91a88e94b690c (tag: lotto-prospective-v1-closed-invalid-remote-anchor)
+| Author:     ZhenyangZent <zhenyangzent@gmail.com>
+| AuthorDate: Wed Jul 29 13:47:19 2026 +0800
+| Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+| CommitDate: Wed Jul 29 13:47:19 2026 +0800
+| 
+|     chore: close V1 with invalid remote anchor
+| 
+* commit 14a82b504d028137cebbdeb8366073002ea25ec9
+| Author:     ZhenyangZent <zhenyangzent@gmail.com>
+| AuthorDate: Wed Jul 29 13:28:02 2026 +0800
+| Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+| CommitDate: Wed Jul 29 13:28:02 2026 +0800
+| 
+|     fix: isolate review bundle pytest temporary files
+| 
+* commit 81fd18cca53f9510dea689a38fbbd131938123bd
+| Author:     ZhenyangZent <zhenyangzent@gmail.com>
+| AuthorDate: Wed Jul 29 13:21:15 2026 +0800
+| Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+| CommitDate: Wed Jul 29 13:21:15 2026 +0800
+| 
+|     fix: prefer native Python launcher for bundle reproduction
+| 
+* commit 0c517b72ef7330408df4f68613f338637ba1b202
+| Author:     ZhenyangZent <zhenyangzent@gmail.com>
+| AuthorDate: Wed Jul 29 13:19:17 2026 +0800
+| Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+| CommitDate: Wed Jul 29 13:19:17 2026 +0800
+| 
+|     fix: support portable review bundle virtual environments
+| 
+* commit 7a80c2f8b92209b36cb1aac82cba2b7816ca1326
+| Author:     ZhenyangZent <zhenyangzent@gmail.com>
+| AuthorDate: Wed Jul 29 13:17:17 2026 +0800
+| Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+| CommitDate: Wed Jul 29 13:17:17 2026 +0800
+| 
+|     build: make prospective review bundle self-verifying
+| 
+* commit b7e2ad7beb795bb750d3ac70f81a6629dca83f88
+| Author:     ZhenyangZent <zhenyangzent@gmail.com>
+| AuthorDate: Wed Jul 29 13:14:08 2026 +0800
+| Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+| CommitDate: Wed Jul 29 13:14:08 2026 +0800
+| 
+|     test: make prospective review tests self-contained
+| 
+* commit 1b517e01d015c7168e63af13527e433e8133937f
+| Author:     ZhenyangZent <zhenyangzent@gmail.com>
+| AuthorDate: Wed Jul 29 13:13:02 2026 +0800
+| Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+| CommitDate: Wed Jul 29 13:13:02 2026 +0800
+| 
+|     prospective: freeze prediction for draw 115000075
+| 
+* commit f0547e07f13367fc4c8c1aa60d2a5673b5dc3b9a (tag: lotto-prospective-v1-preregistered)
+| Author:     ZhenyangZent <zhenyangzent@gmail.com>
+| AuthorDate: Wed Jul 29 13:12:35 2026 +0800
+| Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+| CommitDate: Wed Jul 29 13:12:35 2026 +0800
+| 
+|     chore: preregister prospective lotto experiment v1
+| 
+* commit 1a014ec4e1ac835fc83c4f10a9edcd00000c6ebf
+  Author:     ZhenyangZent <zhenyangzent@gmail.com>
+  AuthorDate: Wed Jul 29 13:12:10 2026 +0800
+  Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+  CommitDate: Wed Jul 29 13:12:10 2026 +0800
+  
+      build: establish audited lotto analysis baseline

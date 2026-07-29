@@ -1,0 +1,15 @@
+commit c86591159f4d7cbca1f8765f7b06dea80b2f571a
+Author:     ZhenyangZent <zhenyangzent@gmail.com>
+AuthorDate: Wed Jul 29 14:00:13 2026 +0800
+Commit:     ZhenyangZent <zhenyangzent@gmail.com>
+CommitDate: Wed Jul 29 14:00:13 2026 +0800
+
+    prospective-v2: prediction for draw 115000075
+
+ prospective_validation_v2/ledger.jsonl             |   1 +
+ prospective_validation_v2/ledger_head.json         |   2 +-
+ ...al-precheck-115000075-20260729T140005+0800.json |  36 +++++++
+ ...ial-precheck-115000075-20260729T140005+0800.raw |   1 +
+ .../prediction-115000075-probabilities.csv         |  50 +++++++++
+ .../predictions/prediction-115000075.json          | 116 +++++++++++++++++++++
+ 6 files changed, 205 insertions(+), 1 deletion(-)
