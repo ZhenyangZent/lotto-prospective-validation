@@ -1,0 +1,22 @@
+{
+  "closure_reason": "INVALID_REMOTE_TIME_ANCHOR_DESIGN",
+  "closed_at": "2026-07-29T13:46:51+08:00",
+  "effective_formal_sample_count": 0,
+  "experiment_id": "TW649-PROSPECTIVE-20260729-V1",
+  "facts": {
+    "first_prediction_created_before_draw_locally": true,
+    "git_commit_field_is_parent_commit_not_prediction_commit": true,
+    "no_origin_remote": true,
+    "prediction_commit": "1b517e01d015c7168e63af13527e433e8133937f",
+    "prediction_record_hash": "6465fb4fa6c262bda99111e84adf7551de57e56be6de3bee186c15e766d63ae4",
+    "remote_ref_was_not_verified": true,
+    "target_draw_date": "2026-07-31",
+    "target_draw_id": "115000075"
+  },
+  "policy": {
+    "may_be_backfilled_as_formal_sample": false,
+    "preserved_for_audit_and_testing": true,
+    "v1_files_must_not_be_deleted_or_rewritten": true
+  },
+  "summary": "V1第一筆預測雖於開獎前在本機建立，但沒有origin，無法push；ledger的git_commit是預測前parent commit，且流程沒有以實際remote ref驗證push。依V1 bug及missing-draw policy，有效樣本數為0，永不得事後補算。"
+}
