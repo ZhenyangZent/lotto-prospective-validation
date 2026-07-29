@@ -1,0 +1,36 @@
+{
+  "http_retrieved_at": "2026-07-29T14:00:05+08:00",
+  "http_status": 200,
+  "parsed_result": null,
+  "raw_response_file": "official-precheck-115000075-20260729T140005+0800.raw",
+  "raw_response_sha256": "96c3e9cc3fad77164528f5e218548dd7ebe5f6b776423d78375df3f169073fc3",
+  "request_endpoint": "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/Lotto649Result",
+  "request_params": {
+    "pageNum": 1,
+    "pageSize": 10,
+    "period": "115000075"
+  },
+  "request_url": "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/Lotto649Result?period=115000075&pageNum=1&pageSize=10",
+  "response_headers": {
+    "Cache-Control": "no-store,no-cache,no-store",
+    "Connection": "keep-alive",
+    "Content-Encoding": "gzip",
+    "Content-Security-Policy": "frame-ancestors 'self';",
+    "Content-Type": "application/json; charset=utf-8",
+    "Date": "Wed, 29 Jul 2026 06:00:11 GMT",
+    "Permissions-Policy": "fullscreen=(), geolocation=()",
+    "Pragma": "no-cache,no-cache",
+    "Referrer-Policy": "no-referrer",
+    "Server": "HiNetCDN",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+    "Transfer-Encoding": "chunked",
+    "Vary": "Accept-Encoding",
+    "X-Cache": "MISS, MISS, EXPIRED",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "SAMEORIGIN",
+    "access-control-allow-origin": "*",
+    "x-request-id": "1b6004a48079e6eec524cd6dfbfa40d9"
+  },
+  "target_draw_id": "115000075",
+  "target_draw_status": "NOT_ANNOUNCED"
+}
