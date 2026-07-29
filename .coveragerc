@@ -1,0 +1,7 @@
+[run]
+omit =
+    audit_stage2/chatgpt_review_bundle/*
+    .audit_venv/*
+
+[report]
+show_missing = True

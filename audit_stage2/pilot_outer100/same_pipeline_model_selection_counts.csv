@@ -1,0 +1,4 @@
+selected_model,count,proportion
+ExactUniformBaseline,2,0.5
+FullFeatureBatchLogistic,1,0.25
+TransitionOnly,1,0.25

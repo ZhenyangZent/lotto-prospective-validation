@@ -1,0 +1,115 @@
+{
+  "data": {
+    "rows": 2148,
+    "start_date": "2007-01-02",
+    "end_date": "2026-06-30",
+    "sha256": "3973dcdc08ae7b96c31b5a4ee4261db501fc9744857e8cc7dd62e9193f50ad34"
+  },
+  "original_reproduction": {
+    "success": false,
+    "differences": [
+      "初始快照時 next_draw_predictor.py 不存在，原始命令退出碼為2；無原程式可執行、複製或逐行比較。",
+      "待驗證的0.779平均命中屬既有其他回測，不能視為缺失主程式的重現。"
+    ]
+  },
+  "leakage": {
+    "detected": false,
+    "issues": [
+      "審計版未檢出未來資料洩漏；原版缺失，故無法對原版做同樣判定。"
+    ]
+  },
+  "original_model": {
+    "average_hits": 0.0,
+    "brier": 0.0,
+    "log_loss": 0.0
+  },
+  "audited_fixed_holdout": {
+    "prediction_draws": 424,
+    "train_draws": 1694,
+    "average_hits": 0.7028301886792453,
+    "top10_average_hits": 1.2358490566037736,
+    "top12_average_hits": 1.4858490566037736,
+    "brier": 0.10750765783847124,
+    "log_loss": 0.3720062439403746,
+    "probability_sum_min": 5.999999999999998,
+    "probability_sum_max": 6.000000000000002
+  },
+  "audited_walk_forward": {
+    "average_hits": 0.7524271844660194,
+    "brier": 0.1081642496446469,
+    "log_loss": 0.3753307792095066
+  },
+  "uniform_theory": {
+    "average_hits": 0.7346938775510204,
+    "brier": 0.10745522698875468,
+    "log_loss": 0.37177617994345286
+  },
+  "significance": {
+    "raw_p": 0.1758008547953193,
+    "bonferroni_p": 1.0,
+    "holm_p": 1.0,
+    "fdr_bh_p": 0.9378261261147952,
+    "simulation_familywise_p": 0.025974025974025976
+  },
+  "null_simulation": {
+    "runs": 1000,
+    "percentile": 97.5,
+    "monte_carlo_ci": [
+      0.016242535696882235,
+      0.036684823051923075
+    ]
+  },
+  "stability": {
+    "positive_years": 10,
+    "total_years": 16,
+    "top6_mean_jaccard": 0.4438179706472389
+  },
+  "verdict": {
+    "category": "C",
+    "method_correct": false,
+    "predictive_evidence": false,
+    "recommendation_is_experimental": true
+  },
+  "latest_recommendation": {
+    "data_end_date": "2026-06-30",
+    "numbers": [
+      1,
+      22,
+      28,
+      36,
+      43,
+      44
+    ],
+    "evidence_level": "實驗性排序；未證明提高中獎機率"
+  },
+  "best_observed_model": {
+    "model": "Recent50HotBaseline",
+    "prediction_draws": 1648,
+    "average_hits": 0.7682038834951457,
+    "top10_average_hits": 1.2475728155339805,
+    "top12_average_hits": 1.484830097087379,
+    "brier": 0.1091528497733549,
+    "log_loss": 0.3807122112151356,
+    "mean_probability_sum": 6.0,
+    "raw_exact_p": 0.0386087595798996,
+    "normal_approx_p": 0.0380496532868643,
+    "bonferroni_p": 0.7721751915979937,
+    "holm_p": 0.7721751915979937,
+    "fdr_bh_p": 0.7721751915979937,
+    "simulation_familywise_p": 0.0259740259740259,
+    "paired_bootstrap_mean_hit_diff_ci_low": -0.0041113532791757,
+    "paired_bootstrap_mean_hit_diff_ci_high": 0.0711313651674262,
+    "block20_bootstrap_diff_ci_low": -0.0041113532791757,
+    "block20_bootstrap_diff_ci_high": 0.0680973845849019,
+    "brier_difference_vs_uniform": 0.0016976227846002,
+    "log_loss_difference_vs_uniform": 0.0089360312716827,
+    "calibration_intercept": -2.0024992596081828,
+    "calibration_slope": -0.0163165522552976,
+    "expected_calibration_error": 0.0263737287861449
+  },
+  "actual_simulation_counts": {
+    "uniform_random_sequences": 100000,
+    "complete_fair_histories": 1000,
+    "recommendation_bootstraps": 25
+  }
+}

@@ -1,0 +1,5 @@
+........................................................................ [ 90%]
+........                                                                 [100%]
+80 passed, 1 warning in 12.7s
+
+Warning: pytest cache directory was read-only; this does not affect test results.

@@ -1,0 +1,42 @@
+# 初始唯讀盤點（工作目錄：lotto_analysis 的上一層）
+Get-ChildItem -Force
+rg --files lotto_analysis
+git rev-parse --show-toplevel
+git status --short
+git -C lotto_analysis rev-parse --show-toplevel
+git -C lotto_analysis status --short
+
+# 搜尋主要待審計程式及讀取兩份使用者規格
+Get-ChildItem -Recurse -Force -File -Filter '*next*draw*'
+Get-ChildItem -Recurse -Force -File -Filter '*.py'
+Get-Content <audit-request-attachment> -Encoding UTF8
+Get-Content <original-request-attachment> -Encoding UTF8
+
+# 環境與專案描述盤點
+Get-ChildItem -Force
+Get-Content config.yaml, pyproject.toml, requirements.txt
+python --version
+python -m pip --version
+python -m pip freeze
+<bundled-python> --version
+<bundled-python> -m pip --version
+<bundled-python> -m pip freeze
+[System.Environment]::OSVersion.VersionString
+Get-CimInstance Win32_OperatingSystem
+Get-FileHash -Algorithm SHA256 <requested-files>
+
+# 隔離環境與完整稽核
+<bundled-python> -m venv .audit_venv
+.audit_venv\Scripts\python.exe -m pip install -r requirements.txt pyarrow
+.audit_venv\Scripts\python.exe -m py_compile next_draw_predictor_audited.py
+.audit_venv\Scripts\python.exe audit_next_draw\run_audit.py
+.audit_venv\Scripts\python.exe -m pytest -q
+
+# 執行紀錄補充
+.audit_venv\Scripts\python.exe audit_next_draw\run_audit.py
+# 完整計算完成後，在繪圖階段因 Tk init.tcl 缺失退出；統計 checkpoint 已全部落盤。
+# 修正為 Matplotlib Agg 後由 checkpoint 續作：
+.audit_venv\Scripts\python.exe audit_next_draw\run_audit.py --finalize-existing
+.audit_venv\Scripts\python.exe -m pytest -q
+.audit_venv\Scripts\python.exe next_draw_predictor_audited.py
+# 最後呼叫 create_patch_and_bundle()，讓 ZIP 納入 pytest_output.txt。

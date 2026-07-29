@@ -1,0 +1,31 @@
+{
+  "runs": 1000,
+  "history_draws_each": 2148,
+  "inner_draws": 100,
+  "outer_prediction_draws": 20,
+  "selection_rule": "inner Brier ascending; then inner Log Loss ascending; then fixed simplicity rank",
+  "real_selected_model": "FullFeatureBatchLogistic",
+  "real_metrics": {
+    "average_hits": 1.1,
+    "brier": 0.1073699880330933,
+    "log_loss": 0.3713810707562125
+  },
+  "familywise_hit_p_plus_one": 0.03396603396603397,
+  "familywise_hit_ci95": [
+    0.0235929279584269,
+    0.04598126446708158
+  ],
+  "familywise_brier_p_plus_one": 0.0919080919080919,
+  "familywise_brier_ci95": [
+    0.07470470437164412,
+    0.11042558406953998
+  ],
+  "familywise_log_loss_p_plus_one": 0.0919080919080919,
+  "familywise_log_loss_ci95": [
+    0.07470470437164412,
+    0.11042558406953998
+  ],
+  "real_hit_percentile": 96.7,
+  "random_forest_included": false,
+  "limitation": "共同外層僅最後20期；RandomForest因計算成本未納入。每份均包含相同8-C sklearn Batch候選、Online SGD及九個基準。"
+}

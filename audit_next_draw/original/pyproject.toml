@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "taiwan-lotto-analysis"
+version = "1.0.0"
+description = "可重複執行的台灣大樂透歷史資料統計分析與回測系統"
+requires-python = ">=3.11"
+dependencies = [
+  "pandas>=2.2", "numpy>=2.0", "scipy>=1.13", "statsmodels>=0.14",
+  "scikit-learn>=1.5", "matplotlib>=3.9", "openpyxl>=3.1",
+  "requests>=2.32", "beautifulsoup4>=4.12", "pydantic>=2.8", "PyYAML>=6.0"
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8.2"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+

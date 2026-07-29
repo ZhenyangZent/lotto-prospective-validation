@@ -1,0 +1,13 @@
+pandas>=2.2
+numpy>=2.0
+scipy>=1.13
+statsmodels>=0.14
+scikit-learn>=1.5
+matplotlib>=3.9
+openpyxl>=3.1
+requests>=2.32
+beautifulsoup4>=4.12
+pydantic>=2.8
+PyYAML>=6.0
+pytest>=8.2
+

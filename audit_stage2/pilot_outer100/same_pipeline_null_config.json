@@ -1,0 +1,36 @@
+{
+  "base_seed": 20260728,
+  "seed_formula": "20260728 + 1000000 + simulation_id",
+  "runs": 4,
+  "workers": 4,
+  "periods": 2148,
+  "inner_start": 1948,
+  "outer_start": 2048,
+  "outer_draws": 100,
+  "candidate_models": [
+    "ExactUniformBaseline",
+    "FixedNumbersBaseline",
+    "HistoricalTop6Baseline",
+    "Recent20HotBaseline",
+    "Recent50HotBaseline",
+    "Recent100HotBaseline",
+    "GapOnly",
+    "PreviousDrawOnly",
+    "TransitionOnly",
+    "FullFeatureBatchLogistic",
+    "FullFeatureOnlineSGD"
+  ],
+  "C_grid": [
+    0.01,
+    0.03,
+    0.1,
+    0.2,
+    0.5,
+    1.0,
+    3.0,
+    10.0
+  ],
+  "shrink_strength": 0.1,
+  "selection_rule": "inner Brier ascending; then inner Log Loss ascending; then fixed simplicity rank",
+  "same_feature_builder": "next_draw_predictor_audited.build_feature_dataset"
+}

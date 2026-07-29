@@ -1,0 +1,6 @@
+selected_model,count,proportion
+ExactUniformBaseline,443,0.443
+FullFeatureBatchLogistic,248,0.248
+HistoricalTop6Baseline,135,0.135
+TransitionOnly,120,0.12
+FullFeatureOnlineSGD,54,0.054

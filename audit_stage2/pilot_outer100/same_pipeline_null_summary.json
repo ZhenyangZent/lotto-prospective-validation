@@ -1,0 +1,31 @@
+{
+  "runs": 4,
+  "history_draws_each": 2148,
+  "inner_draws": 100,
+  "outer_prediction_draws": 100,
+  "selection_rule": "inner Brier ascending; then inner Log Loss ascending; then fixed simplicity rank",
+  "real_selected_model": "TransitionOnly",
+  "real_metrics": {
+    "average_hits": 0.57,
+    "brier": 0.1076738376777638,
+    "log_loss": 0.3728336290021359
+  },
+  "familywise_hit_p_plus_one": 1.0,
+  "familywise_hit_ci95": [
+    0.5101091635454027,
+    1.0
+  ],
+  "familywise_brier_p_plus_one": 1.0,
+  "familywise_brier_ci95": [
+    0.5101091635454027,
+    1.0
+  ],
+  "familywise_log_loss_p_plus_one": 1.0,
+  "familywise_log_loss_ci95": [
+    0.5101091635454027,
+    1.0
+  ],
+  "real_hit_percentile": 0.0,
+  "random_forest_included": false,
+  "limitation": "共同外層僅最後100期；RandomForest因計算成本未納入。每份均包含相同8-C sklearn Batch候選、Online SGD及九個基準。"
+}

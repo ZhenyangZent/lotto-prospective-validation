@@ -1,0 +1,24 @@
+{
+  "rule": "inner Brier ascending; then inner Log Loss ascending; then fixed simplicity rank",
+  "inner_targets": [
+    2028,
+    2127
+  ],
+  "outer_targets": [
+    2128,
+    2147
+  ],
+  "C_grid": [
+    0.01,
+    0.03,
+    0.1,
+    0.2,
+    0.5,
+    1.0,
+    3.0,
+    10.0
+  ],
+  "shrink_strength": 0.1,
+  "selected_model": "FullFeatureBatchLogistic",
+  "selected_C_for_batch": 0.01
+}

@@ -1,0 +1,107 @@
+{
+  "source_page": "https://www.taiwanlottery.com/lotto/history/result_download/",
+  "api": "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/ResultDownload",
+  "accessed_date": "2026-07-28",
+  "files": [
+    {
+      "year": 2007,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2007.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2007.zip"
+    },
+    {
+      "year": 2008,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2008.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2008.zip"
+    },
+    {
+      "year": 2009,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2009.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2009.zip"
+    },
+    {
+      "year": 2010,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2010.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2010.zip"
+    },
+    {
+      "year": 2011,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2011.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2011.zip"
+    },
+    {
+      "year": 2012,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2012.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2012.zip"
+    },
+    {
+      "year": 2013,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2013.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2013.zip"
+    },
+    {
+      "year": 2014,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2014.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2014.zip"
+    },
+    {
+      "year": 2015,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2015.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2015.zip"
+    },
+    {
+      "year": 2016,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2016.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2016.zip"
+    },
+    {
+      "year": 2017,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2017.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2017.zip"
+    },
+    {
+      "year": 2018,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2018.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2018.zip"
+    },
+    {
+      "year": 2019,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2019.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2019.zip"
+    },
+    {
+      "year": 2020,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2020.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2020.zip"
+    },
+    {
+      "year": 2021,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2021.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2021.zip"
+    },
+    {
+      "year": 2022,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2022.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2022.zip"
+    },
+    {
+      "year": 2023,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2023.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2023.zip"
+    },
+    {
+      "year": 2024,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2024.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2024.zip"
+    },
+    {
+      "year": 2025,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2025.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2025.zip"
+    },
+    {
+      "year": 2026,
+      "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\data\\raw\\2026.zip",
+      "url": "https://cdn.taiwanlottery.com.tw/app/FilesForDownload/Download/LottoResult/2026.zip"
+    }
+  ]
+}

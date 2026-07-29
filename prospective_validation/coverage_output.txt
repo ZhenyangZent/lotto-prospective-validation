@@ -1,0 +1,21 @@
+Name                                  Stmts   Miss  Cover
+-------------------------------------------------------------------
+prospective/__init__.py                   2      0   100%
+prospective/canonical.py                 94     10    89%
+prospective/config.py                    17      0   100%
+prospective/export_review_bundle.py       5      5     0%
+prospective/freeze_experiment.py          4      4     0%
+prospective/gitops.py                    38     19    50%
+prospective/ingest_result.py              5      5     0%
+prospective/metrics.py                   77     16    79%
+prospective/model.py                     29      7    76%
+prospective/official.py                  83     48    42%
+prospective/predict_next.py               5      5     0%
+prospective/report.py                     3      3     0%
+prospective/status.py                     3      3     0%
+prospective/verify_ledger.py              4      4     0%
+prospective/workflow.py                 217    100    54%
+-------------------------------------------------------------------
+TOTAL                                   586    229    61%
+
+80 passed, 1 warning in 11.11s

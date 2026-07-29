@@ -1,0 +1,20 @@
+﻿..........................................................               [100%]
+============================== warnings summary ===============================
+.audit_venv\Lib\site-packages\_pytest\cacheprovider.py:469
+  C:\Users\zheny\Music\University\program\彩卷分析\lotto_analysis\.audit_venv\Lib\site-packages\_pytest\cacheprovider.py:469: PytestCacheWarning: could not create cache path C:\Users\zheny\Music\University\program\彩卷分析\lotto_analysis\.pytest_cache\v\cache\nodeids: [WinError 5] 存取被拒。: 'C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\.pytest_cache\\v\\cache'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+______________ coverage: platform win32, python 3.12.13-final-0 _______________
+
+Name                              Stmts   Miss  Cover   Missing
+---------------------------------------------------------------
+audit_stage2\__init__.py              2      0   100%
+audit_stage2\finalize_stage2.py     176    133    24%   37, 41-77, 81-124, 128-203, 210-232, 236-241, 245-265, 274, 282-289, 293-309
+audit_stage2\pipeline.py            257     94    63%   64, 69-71, 84, 170, 188-191, 197-212, 231-242, 248, 298-304, 309-338, 344-350, 363-371, 408-412, 417-430
+audit_stage2\run_stage2.py          285    285     0%   2-486
+next_draw_predictor_audited.py      370     61    84%   54-58, 84, 91, 93, 97, 127, 129, 132, 135, 244, 246, 269, 273, 275, 288, 291, 309, 322, 386, 389, 425, 427, 431, 442, 475, 500, 502, 507, 510, 570-576, 583, 586, 592, 603-619, 623
+---------------------------------------------------------------
+TOTAL                              1090    573    47%
+58 passed, 1 warning in 7.80s

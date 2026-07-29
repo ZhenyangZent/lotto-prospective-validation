@@ -1,0 +1,10 @@
+manifest_scope=all payload files except file_manifest.csv, file_manifest.json, bundle_validation.txt
+manifest_payload_files=37
+pre_zip_all_manifest_files_exist=true
+pre_zip_sha256_recomputed=true
+zip_entries=40
+expected_entries_manifest_plus_metadata=40
+zip_test_passed=True
+payload_hashes_passed=True
+zip_under_100mb=True
+validation_passed=true

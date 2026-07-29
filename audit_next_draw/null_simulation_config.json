@@ -1,0 +1,22 @@
+{
+  "seed": 20260728,
+  "fast_runs": 100000,
+  "complete_history_runs": 1000,
+  "history_draws": 2148,
+  "numbers": 49,
+  "draw_size": 6,
+  "common_start": 500,
+  "selection_rule": "前半平均命中最高，後半完全樣本外評估",
+  "candidate_models": [
+    "fixed_1_6",
+    "historical",
+    "recent20",
+    "recent50",
+    "recent100",
+    "cold_gap",
+    "repeat_last",
+    "exclude_last",
+    "ewma",
+    "prespecified_full_linear"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "actual_overlap_mean": 0.7368421052631579,
+  "theory_overlap_mean": 0.7346938775510204,
+  "actual_overlap_distribution": {
+    "0": 0.4452724732184443,
+    "1": 0.3935724266418258,
+    "2": 0.1406613879832324,
+    "3": 0.020027945971122497,
+    "4": 0.0004657661853749418,
+    "5": 0.0,
+    "6": 0.0
+  },
+  "full_average_hits": 0.7524271844660194,
+  "without_last_average_hits": 0.716626213592233,
+  "only_last_average_hits": 0.7129854368932039,
+  "repeat_last_average_hits": 0.741504854368932,
+  "exclude_last_average_hits": 0.7129854368932039
+}

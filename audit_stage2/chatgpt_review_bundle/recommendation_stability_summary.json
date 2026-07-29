@@ -1,0 +1,45 @@
+{
+  "bootstrap_runs": 1000,
+  "delete_last_runs": 100,
+  "total_variants": 1123,
+  "reference_numbers": [
+    1,
+    5,
+    15,
+    22,
+    27,
+    47
+  ],
+  "mean_jaccard": 0.2209765894538824,
+  "jaccard_ci95": [
+    0.0,
+    0.5
+  ],
+  "most_common_combination": [
+    1,
+    9,
+    24,
+    27,
+    28,
+    39
+  ],
+  "most_common_combination_count": 10,
+  "most_stable_numbers": [
+    1,
+    5,
+    15,
+    22,
+    28,
+    47
+  ],
+  "least_stable_numbers": [
+    30,
+    33,
+    19,
+    26,
+    34,
+    14
+  ],
+  "stable_unique_combination": false,
+  "conclusion": "模型不存在穩定的唯一推薦組合。"
+}

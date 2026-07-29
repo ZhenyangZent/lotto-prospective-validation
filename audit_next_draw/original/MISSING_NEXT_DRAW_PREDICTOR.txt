@@ -1,0 +1,4 @@
+初始快照時間：2026-07-28（Asia/Taipei）
+
+待審計的 next_draw_predictor.py 在任何修改前並不存在於專案根目錄，也未在專案子目錄中找到。
+因此沒有原始程式可複製；original_baseline_output.txt 保存了直接執行原始指定命令的完整缺檔錯誤。

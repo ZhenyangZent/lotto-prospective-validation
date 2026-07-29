@@ -1,0 +1,19 @@
+{
+  "runs": 10000,
+  "includes_sklearn_ml": false,
+  "candidate_models": [
+    "ExactUniformBaseline",
+    "FixedNumbersBaseline",
+    "HistoricalTop6Baseline",
+    "Recent20HotBaseline",
+    "Recent50HotBaseline",
+    "Recent100HotBaseline",
+    "GapOnly",
+    "PreviousDrawOnly",
+    "TransitionOnly"
+  ],
+  "mean_hits": 0.7361949999999999,
+  "mean_brier": 0.10747077295862718,
+  "mean_log_loss": 0.3718489780835144,
+  "warning": "此簡化流程不得用作完整 ML same-pipeline family-wise p。"
+}

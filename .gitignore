@@ -1,0 +1,17 @@
+.venv/
+.audit_venv/
+.packages/
+__pycache__/
+.pytest_cache/
+.coverage
+*.py[cod]
+data/raw/*.zip
+data/interim/*
+data/processed/*
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+reports/figures/*.png
+reports/tables/*.csv
+reports/results.json
+
+prospective_validation/prospective_setup_review.zip

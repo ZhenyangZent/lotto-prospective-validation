@@ -1,0 +1,6 @@
+{
+  "base_seed": 20260728,
+  "same_pipeline_formula": "base+1000000+simulation_id",
+  "bootstrap_formula": "base+2000000+iteration",
+  "simplified_formula": "base+3000000+simulation_id"
+}

@@ -1,0 +1,27 @@
+﻿{
+    "next_draw_predictor.py":  {
+                                   "exists":  false,
+                                   "sha256":  null,
+                                   "bytes":  0
+                               },
+    "data\\processed\\lotto649.csv":  {
+                                          "exists":  true,
+                                          "sha256":  "3973dcdc08ae7b96c31b5a4ee4261db501fc9744857e8cc7dd62e9193f50ad34",
+                                          "bytes":  305351
+                                      },
+    "config.yaml":  {
+                        "exists":  true,
+                        "sha256":  "6b1e72389f06e7c2143a807ff38e1f52e69174a841b180ab42a59bb3bff85838",
+                        "bytes":  567
+                    },
+    "pyproject.toml":  {
+                           "exists":  true,
+                           "sha256":  "3690b3f22a0aa21f95892332ce254b7fdfc3deb768236dd332fe8de91c2b72ae",
+                           "bytes":  602
+                       },
+    "next_draw_predictor_audited.py_final":  {
+                                                 "exists":  true,
+                                                 "sha256":  "addcb0dfd5a0db6b90d36c94a319a0c97b5e42f151652513fe4244cb4eda58ba",
+                                                 "bytes":  29167
+                                             }
+}

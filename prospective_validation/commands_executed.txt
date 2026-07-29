@@ -1,0 +1,10 @@
+python -m pytest -q tests/test_prospective.py
+python -m pytest -q
+python -m pytest --cov=prospective --cov-report=term-missing
+python -c "from prospective.official import update_current_month; ..."
+python -m prospective.freeze_experiment
+python -m prospective.predict_next --draw-id 115000075 --draw-date 2026-07-31
+python -m prospective.verify_ledger
+python -m prospective.status
+python -m prospective.report
+python -m prospective.export_review_bundle

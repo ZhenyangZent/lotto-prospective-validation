@@ -1,0 +1,628 @@
+diff --git a/next_draw_predictor.py b/next_draw_predictor_audited.py
+new file mode 100644
+--- /dev/null
++++ b/next_draw_predictor_audited.py
+@@ -0,0 +1,623 @@
++"""台灣大樂透下一期號碼分析器（獨立審計版）。
++
++本模組只處理六個一般獎號。輸出是邊際排序分數，不是六號聯合機率，
++也沒有證據顯示能提高中獎機率。所有時間特徵在預測第 t 期時只使用 0..t-1 期。
++"""
++from __future__ import annotations
++
++import argparse
++import hashlib
++import json
++import logging
++from dataclasses import asdict, dataclass
++from pathlib import Path
++from typing import Any, Iterable, Sequence
++
++import numpy as np
++import pandas as pd
++from sklearn.compose import ColumnTransformer
++from sklearn.linear_model import LogisticRegression
++from sklearn.linear_model import SGDClassifier
++from sklearn.metrics import log_loss
++from sklearn.pipeline import Pipeline
++from sklearn.preprocessing import OneHotEncoder, StandardScaler
++
++LOGGER = logging.getLogger("next_draw_predictor_audited")
++NUMBER_COLUMNS = [f"number_{i}" for i in range(1, 7)]
++UNIFORM_PROBABILITY = 6.0 / 49.0
++MODEL_VERSION = "audited-1.0.0"
++DEFAULT_SEED = 20260728
++
++BASE_FEATURE_COLUMNS = [
++    "long_z", "recent20_z", "recent50_z", "recent100_z", "ewma_z",
++    "gap_z", "transition_z", "in_last_draw",
++]
++
++
++@dataclass(frozen=True)
++class EvaluationSummary:
++    """一次按完整期別切割的評估摘要。"""
++
++    prediction_draws: int
++    train_draws: int
++    average_hits: float
++    top10_average_hits: float
++    top12_average_hits: float
++    brier: float
++    log_loss: float
++    probability_sum_min: float
++    probability_sum_max: float
++
++
++def sha256_file(path: str | Path) -> str:
++    """串流計算 SHA-256。"""
++    digest = hashlib.sha256()
++    with Path(path).open("rb") as handle:
++        for block in iter(lambda: handle.read(1024 * 1024), b""):
++            digest.update(block)
++    return digest.hexdigest()
++
++
++def load_lotto_data(path: str | Path) -> pd.DataFrame:
++    """載入並嚴格驗證整理後 CSV，不靜默刪除或重排資料。"""
++    data = pd.read_csv(path, dtype={"draw_id": "string"})
++    validate_lotto_data(data)
++    result = data.copy()
++    result["draw_date"] = pd.to_datetime(result["draw_date"], errors="raise")
++    result[NUMBER_COLUMNS] = result[NUMBER_COLUMNS].astype(int)
++    result["draw_id"] = result["draw_id"].astype(str)
++    return result
++
++
++def validate_lotto_data(data: pd.DataFrame) -> None:
++    """驗證模型必要欄位、範圍、唯一性與時間順序；失敗時明確拋錯。"""
++    required = ["draw_id", "draw_date", *NUMBER_COLUMNS]
++    if data.empty:
++        raise ValueError("資料不可為空")
++    missing = [column for column in required if column not in data.columns]
++    if missing:
++        raise ValueError(f"缺少必要欄位：{missing}")
++    if data[required].isna().any().any():
++        raise ValueError("必要欄位存在空值")
++    numeric = data[NUMBER_COLUMNS].apply(pd.to_numeric, errors="coerce")
++    if numeric.isna().any().any():
++        raise ValueError("一般獎號包含非數值")
++    if not numeric.apply(lambda s: s.between(1, 49)).all().all():
++        raise ValueError("一般獎號必須介於 1 與 49")
++    if numeric.nunique(axis=1).ne(6).any():
++        raise ValueError("同一期六個一般獎號必須互不相同")
++    dates = pd.to_datetime(data["draw_date"], errors="coerce")
++    if dates.isna().any():
++        raise ValueError("開獎日期無法解析")
++    if data["draw_id"].astype(str).duplicated().any():
++        raise ValueError("draw_id 重複")
++    if dates.duplicated().any():
++        raise ValueError("draw_date 重複")
++    if data.duplicated().any():
++        raise ValueError("存在完全重複資料列")
++    if not dates.is_monotonic_increasing:
++        raise ValueError("資料必須依 draw_date 遞增排序")
++
++
++def indicator_matrix(data: pd.DataFrame) -> np.ndarray:
++    """轉為 (期數, 49) 的一般獎號 0/1 矩陣。"""
++    matrix = np.zeros((len(data), 49), dtype=np.int8)
++    if len(data):
++        values = data[NUMBER_COLUMNS].to_numpy(dtype=int) - 1
++        matrix[np.arange(len(data))[:, None], values] = 1
++    return matrix
++
++
++def _zscore(values: np.ndarray) -> np.ndarray:
++    values = np.asarray(values, dtype=float)
++    deviation = float(values.std(ddof=0))
++    return np.zeros_like(values) if deviation <= 1e-15 else (values - values.mean()) / deviation
++
++
++def _feature_snapshots(
++    matrix: np.ndarray,
++    targets: Iterable[int],
++    *,
++    ewma_alpha: float = 0.06,
++    transition_alpha: float = 30.0,
++    recent_windows: Sequence[int] = (20, 50, 100),
++) -> dict[int, pd.DataFrame]:
++    """依時間順序產生快照；更新到 t-1 後才為 t 建立特徵。"""
++    if not 0 < ewma_alpha <= 1:
++        raise ValueError("ewma_alpha 必須介於 (0, 1]")
++    if transition_alpha < 0:
++        raise ValueError("transition_alpha 不可為負")
++    target_set = set(int(x) for x in targets)
++    if any(x < 0 or x > len(matrix) for x in target_set):
++        raise ValueError("target index 超出資料範圍")
++    requested_windows = tuple(int(x) for x in recent_windows)
++    if any(x <= 0 for x in requested_windows):
++        raise ValueError("recent window 必須為正整數")
++
++    cumulative = np.vstack([np.zeros((1, 49), dtype=np.int32), matrix.cumsum(axis=0)])
++    last_seen = np.full(49, -1, dtype=np.int32)
++    ewma = np.full(49, UNIFORM_PROBABILITY, dtype=float)
++    trans_success = np.zeros((2, 49), dtype=float)
++    trans_total = np.zeros((2, 49), dtype=float)
++    snapshots: dict[int, pd.DataFrame] = {}
++
++    for target in range(len(matrix) + 1):
++        if target > 0:
++            observed = matrix[target - 1]
++            present = np.flatnonzero(observed)
++            last_seen[present] = target - 1
++            ewma = ewma_alpha * observed + (1.0 - ewma_alpha) * ewma
++            if target >= 2:
++                previous = matrix[target - 2]
++                for state in (0, 1):
++                    mask = previous == state
++                    trans_total[state, mask] += 1
++                    trans_success[state, mask] += observed[mask]
++        if target not in target_set:
++            continue
++
++        count = cumulative[target].astype(float)
++        long_rate = (count + 12.0 * UNIFORM_PROBABILITY) / (target + 12.0)
++        rates: dict[int, np.ndarray] = {}
++        for window in requested_windows:
++            begin = max(0, target - window)
++            denominator = max(1, target - begin)
++            rates[window] = (cumulative[target] - cumulative[begin]) / denominator
++        previous_state = matrix[target - 1] if target else np.zeros(49, dtype=np.int8)
++        idx = previous_state.astype(int)
++        transition_rate = (
++            trans_success[idx, np.arange(49)] + transition_alpha * UNIFORM_PROBABILITY
++        ) / (trans_total[idx, np.arange(49)] + transition_alpha)
++        gap = np.where(last_seen >= 0, target - 1 - last_seen, target).astype(float)
++        rows = pd.DataFrame({
++            "number": np.arange(1, 50, dtype=int),
++            "long_z": _zscore(long_rate),
++            "recent20_z": _zscore(rates.get(20, long_rate)),
++            "recent50_z": _zscore(rates.get(50, long_rate)),
++            "recent100_z": _zscore(rates.get(100, long_rate)),
++            "ewma_z": _zscore(ewma),
++            "gap_z": _zscore(gap),
++            "transition_z": _zscore(transition_rate),
++            "in_last_draw": previous_state.astype(int),
++            "long_rate": long_rate,
++            "recent20_rate": rates.get(20, long_rate),
++            "recent50_rate": rates.get(50, long_rate),
++            "recent100_rate": rates.get(100, long_rate),
++            "ewma_rate": ewma.copy(),
++            "gap": gap,
++            "transition_rate": transition_rate,
++            "history_draws": target,
++        })
++        snapshots[target] = rows
++    return snapshots
++
++
++def build_feature_dataset(
++    data: pd.DataFrame,
++    min_history: int = 30,
++    *,
++    ewma_alpha: float = 0.06,
++    transition_alpha: float = 30.0,
++    recent_windows: Sequence[int] = (20, 50, 100),
++) -> pd.DataFrame:
++    """建立第 t 期候選列；特徵僅使用 0..t-1，標籤才讀取第 t 期。"""
++    validate_lotto_data(data)
++    if min_history < 1 or min_history >= len(data):
++        raise ValueError("min_history 必須至少為 1 且小於資料期數")
++    matrix = indicator_matrix(data)
++    targets = range(min_history, len(data))
++    snapshots = _feature_snapshots(
++        matrix, targets, ewma_alpha=ewma_alpha,
++        transition_alpha=transition_alpha, recent_windows=recent_windows,
++    )
++    frames: list[pd.DataFrame] = []
++    for target in targets:
++        frame = snapshots[target].copy()
++        frame["target_index"] = target
++        frame["draw_id"] = str(data.iloc[target]["draw_id"])
++        frame["draw_date"] = pd.Timestamp(data.iloc[target]["draw_date"])
++        frame["target"] = matrix[target]
++        frames.append(frame)
++    return pd.concat(frames, ignore_index=True)
++
++
++def build_next_features(
++    data: pd.DataFrame,
++    *,
++    ewma_alpha: float = 0.06,
++    transition_alpha: float = 30.0,
++    recent_windows: Sequence[int] = (20, 50, 100),
++) -> pd.DataFrame:
++    """使用全部已知資料建立下一期特徵；與歷史快照共用完全相同定義。"""
++    validate_lotto_data(data)
++    matrix = indicator_matrix(data)
++    return _feature_snapshots(
++        matrix, [len(data)], ewma_alpha=ewma_alpha,
++        transition_alpha=transition_alpha, recent_windows=recent_windows,
++    )[len(data)]
++
++
++def _project_capped_simplex(values: np.ndarray, total: float = 6.0) -> np.ndarray:
++    """歐式投影至 0<=p<=1 且 sum(p)=total 的 capped simplex。"""
++    vector = np.nan_to_num(np.asarray(values, dtype=float), nan=0.0, posinf=1.0, neginf=0.0)
++    if vector.shape != (49,):
++        raise ValueError("必須提供恰好 49 個分數")
++    if not 0 <= total <= len(vector):
++        raise ValueError("total 超出可行範圍")
++    low, high = float(vector.min() - 1.0), float(vector.max())
++    for _ in range(100):
++        midpoint = (low + high) / 2.0
++        candidate = np.clip(vector - midpoint, 0.0, 1.0)
++        if candidate.sum() > total:
++            low = midpoint
++        else:
++            high = midpoint
++    result = np.clip(vector - (low + high) / 2.0, 0.0, 1.0)
++    # 浮點尾差只分配到尚未碰界的元素。
++    difference = total - float(result.sum())
++    free = np.flatnonzero((result > 1e-12) & (result < 1 - 1e-12))
++    if len(free):
++        result[free] += difference / len(free)
++    return result
++
++
++def normalize_and_shrink_probabilities(
++    raw_probabilities: Sequence[float], shrink_strength: float = 0.10,
++) -> np.ndarray:
++    """固定事前收縮後回傳合法邊際機率；不使用外層測試集選強度。"""
++    if not 0 <= shrink_strength <= 1:
++        raise ValueError("shrink_strength 必須介於 0 與 1")
++    projected = _project_capped_simplex(np.asarray(raw_probabilities, dtype=float), 6.0)
++    result = (1.0 - shrink_strength) * projected + shrink_strength * UNIFORM_PROBABILITY
++    if not np.isclose(result.sum(), 6.0, atol=1e-10):
++        raise RuntimeError("機率總和投影失敗")
++    if (result < -1e-12).any() or (result > 1 + 1e-12).any():
++        raise RuntimeError("機率超出 [0,1]")
++    return result
++
++
++def make_model(
++    *,
++    c: float = 0.20,
++    seed: int = DEFAULT_SEED,
++    feature_columns: Sequence[str] = BASE_FEATURE_COLUMNS,
++    include_number: bool = True,
++) -> Pipeline:
++    """建立只由訓練 fold fit scaler/encoder 的 Logistic Regression。"""
++    if c <= 0:
++        raise ValueError("C 必須大於 0")
++    numeric = list(feature_columns)
++    if not numeric and not include_number:
++        raise ValueError("至少需要一項特徵")
++    transformers: list[tuple[str, Any, list[str]]] = []
++    if numeric:
++        transformers.append(("numeric", StandardScaler(), numeric))
++    if include_number:
++        transformers.append(("number", OneHotEncoder(handle_unknown="ignore"), ["number"]))
++    preprocessor = ColumnTransformer(transformers, remainder="drop")
++    estimator = LogisticRegression(
++        C=float(c), max_iter=500, solver="lbfgs", random_state=int(seed),
++        class_weight=None,
++    )
++    return Pipeline([("preprocess", preprocessor), ("model", estimator)])
++
++
++def stable_top_k(probabilities: Sequence[float], k: int) -> list[int]:
++    """依機率降冪、號碼升冪穩定取 Top-k。"""
++    values = np.asarray(probabilities, dtype=float)
++    if values.shape != (49,) or not 1 <= k <= 49:
++        raise ValueError("輸入須為 49 個分數且 1<=k<=49")
++    numbers = np.arange(1, 50)
++    order = np.lexsort((numbers, -values))
++    return numbers[order[:k]].tolist()
++
++
++def score_one_draw(
++    probabilities: Sequence[float], actual_numbers: Sequence[int],
++) -> dict[str, float | int | list[int]]:
++    """以每期為群組計算命中、Brier 與 binary log loss。"""
++    probs = np.asarray(probabilities, dtype=float)
++    actual_values = np.asarray(actual_numbers, dtype=int)
++    if probs.shape != (49,) or len(actual_values) != 6 or len(np.unique(actual_values)) != 6:
++        raise ValueError("需要 49 個機率與 6 個不重複實際號碼")
++    target = np.zeros(49, dtype=int)
++    target[actual_values - 1] = 1
++    clipped = np.clip(probs, 1e-12, 1 - 1e-12)
++    actual_set = set(actual_values.tolist())
++    top6, top10, top12 = (stable_top_k(probs, k) for k in (6, 10, 12))
++    return {
++        "top6": top6, "top10": top10, "top12": top12,
++        "hits_top6": len(actual_set.intersection(top6)),
++        "hits_top10": len(actual_set.intersection(top10)),
++        "hits_top12": len(actual_set.intersection(top12)),
++        "brier": float(np.mean((probs - target) ** 2)),
++        "log_loss": float(log_loss(target, clipped, labels=[0, 1])),
++        "probability_sum": float(probs.sum()),
++    }
++
++
++def _prediction_rows(
++    model: Pipeline,
++    test: pd.DataFrame,
++    data: pd.DataFrame,
++    shrink_strength: float,
++    model_name: str,
++) -> tuple[pd.DataFrame, pd.DataFrame]:
++    raw = model.predict_proba(test)[:, 1]
++    detail_rows: list[dict[str, Any]] = []
++    per_number: list[dict[str, Any]] = []
++    for target, group in test.assign(raw_probability=raw).groupby("target_index", sort=True):
++        group = group.sort_values("number")
++        probabilities = normalize_and_shrink_probabilities(group["raw_probability"], shrink_strength)
++        actual = data.iloc[int(target)][NUMBER_COLUMNS].to_numpy(dtype=int)
++        score = score_one_draw(probabilities, actual)
++        detail_rows.append({
++            "target_index": int(target), "draw_id": str(data.iloc[int(target)]["draw_id"]),
++            "draw_date": pd.Timestamp(data.iloc[int(target)]["draw_date"]).date().isoformat(),
++            "actual_numbers": " ".join(map(str, sorted(actual.tolist()))),
++            **{k: (" ".join(map(str, v)) if isinstance(v, list) else v) for k, v in score.items()},
++            "model_version": model_name,
++        })
++        for number, probability, target_value in zip(group["number"], probabilities, group["target"]):
++            per_number.append({
++                "target_index": int(target), "draw_id": str(data.iloc[int(target)]["draw_id"]),
++                "number": int(number), "probability": float(probability), "target": int(target_value),
++                "model_version": model_name,
++            })
++    return pd.DataFrame(detail_rows), pd.DataFrame(per_number)
++
++
++def evaluate_model(
++    feature_data: pd.DataFrame,
++    data: pd.DataFrame,
++    *,
++    test_ratio: float = 0.20,
++    c: float = 0.20,
++    shrink_strength: float = 0.10,
++    seed: int = DEFAULT_SEED,
++    feature_columns: Sequence[str] = BASE_FEATURE_COLUMNS,
++    include_number: bool = True,
++) -> tuple[EvaluationSummary, pd.DataFrame, pd.DataFrame, Pipeline]:
++    """固定 holdout；以完整 target_index 分割，絕不拆散同一期 49 列。"""
++    if not 0 < test_ratio < 1:
++        raise ValueError("test_ratio 必須嚴格介於 0 與 1")
++    groups = np.sort(feature_data["target_index"].unique())
++    if len(groups) < 2:
++        raise ValueError("至少需要兩個可預測期")
++    split_position = int(np.floor(len(groups) * (1.0 - test_ratio)))
++    if split_position <= 0 or split_position >= len(groups):
++        raise ValueError("test_ratio 造成空訓練集或空測試集")
++    train_groups, test_groups = groups[:split_position], groups[split_position:]
++    train = feature_data[feature_data["target_index"].isin(train_groups)]
++    test = feature_data[feature_data["target_index"].isin(test_groups)]
++    model = make_model(c=c, seed=seed, feature_columns=feature_columns, include_number=include_number)
++    model.fit(train, train["target"])
++    predictions, per_number = _prediction_rows(
++        model, test, data, shrink_strength, f"{MODEL_VERSION}-fixed-holdout",
++    )
++    summary = EvaluationSummary(
++        prediction_draws=len(predictions), train_draws=len(train_groups),
++        average_hits=float(predictions["hits_top6"].mean()),
++        top10_average_hits=float(predictions["hits_top10"].mean()),
++        top12_average_hits=float(predictions["hits_top12"].mean()),
++        brier=float(predictions["brier"].mean()),
++        log_loss=float(predictions["log_loss"].mean()),
++        probability_sum_min=float(predictions["probability_sum"].min()),
++        probability_sum_max=float(predictions["probability_sum"].max()),
++    )
++    return summary, predictions, per_number, model
++
++
++def walk_forward_evaluate(
++    feature_data: pd.DataFrame,
++    data: pd.DataFrame,
++    *,
++    first_target: int,
++    retrain_interval: int | None = 1,
++    c: float = 0.20,
++    shrink_strength: float = 0.10,
++    seed: int = DEFAULT_SEED,
++    feature_columns: Sequence[str] = BASE_FEATURE_COLUMNS,
++    include_number: bool = True,
++) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
++    """擴張視窗 walk-forward；每次 fit 及 scaler 只看到 target 以前的期別。"""
++    if first_target < 1 or first_target >= len(data):
++        raise ValueError("first_target 超出範圍")
++    if retrain_interval is not None and retrain_interval < 1:
++        raise ValueError("retrain_interval 必須為正整數或 None（固定模型）")
++    available = set(feature_data["target_index"].unique().tolist())
++    targets = [target for target in range(first_target, len(data)) if target in available]
++    if not targets:
++        raise ValueError("指定範圍沒有可評估期")
++    model: Pipeline | None = None
++    prediction_frames: list[pd.DataFrame] = []
++    number_frames: list[pd.DataFrame] = []
++    metadata: list[dict[str, Any]] = []
++    last_fit_target: int | None = None
++    for offset, target in enumerate(targets):
++        should_fit = model is None or (retrain_interval is not None and offset % retrain_interval == 0)
++        if should_fit:
++            train = feature_data[feature_data["target_index"] < target]
++            if train.empty:
++                raise ValueError("第一個預測期以前沒有監督式訓練資料")
++            model = make_model(c=c, seed=seed, feature_columns=feature_columns, include_number=include_number)
++            model.fit(train, train["target"])
++            last_fit_target = target
++        test = feature_data[feature_data["target_index"] == target]
++        assert model is not None and last_fit_target is not None
++        version = f"{MODEL_VERSION}-wf-r{retrain_interval or 'fixed'}"
++        draw_predictions, per_number = _prediction_rows(model, test, data, shrink_strength, version)
++        draw_predictions["train_start_date"] = pd.Timestamp(
++            data.iloc[int(feature_data["target_index"].min())]["draw_date"]
++        ).date().isoformat()
++        draw_predictions["train_end_date"] = pd.Timestamp(data.iloc[last_fit_target - 1]["draw_date"]).date().isoformat()
++        draw_predictions["training_draws"] = last_fit_target
++        draw_predictions["parameters"] = json.dumps({
++            "C": c, "shrink_strength": shrink_strength,
++            "retrain_interval": retrain_interval, "features": list(feature_columns),
++            "include_number": include_number, "seed": seed,
++        }, sort_keys=True)
++        prediction_frames.append(draw_predictions)
++        number_frames.append(per_number)
++        metadata.append({
++            "target_index": target, "draw_id": str(data.iloc[target]["draw_id"]),
++            "fit_performed": should_fit, "last_fit_target": last_fit_target,
++            "max_training_target": int(feature_data.loc[feature_data["target_index"] < last_fit_target, "target_index"].max()),
++            "test_target": target, "retrain_interval": retrain_interval or 0,
++        })
++    return pd.concat(prediction_frames, ignore_index=True), pd.concat(number_frames, ignore_index=True), pd.DataFrame(metadata)
++
++
++def _online_design(frame: pd.DataFrame, feature_columns: Sequence[str], include_number: bool) -> np.ndarray:
++    """建立固定欄序的線上模型設計矩陣；號碼 one-hot 不需要從未來 fit 類別。"""
++    numeric = frame[list(feature_columns)].to_numpy(dtype=float) if feature_columns else np.empty((len(frame), 0))
++    if not include_number:
++        return numeric
++    one_hot = np.zeros((len(frame), 49), dtype=float)
++    one_hot[np.arange(len(frame)), frame["number"].to_numpy(dtype=int) - 1] = 1.0
++    return np.hstack([numeric, one_hot])
++
++
++def online_walk_forward_evaluate(
++    feature_data: pd.DataFrame,
++    data: pd.DataFrame,
++    *,
++    first_target: int,
++    retrain_interval: int | None = 1,
++    c: float = 0.20,
++    shrink_strength: float = 0.10,
++    seed: int = DEFAULT_SEED,
++    feature_columns: Sequence[str] = BASE_FEATURE_COLUMNS,
++    include_number: bool = True,
++) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
++    """計算可行的逐期 expanding 線上 Logistic walk-forward。
++
++    使用 SGDClassifier(log_loss)；初始模型只 fit first_target 前資料，之後僅在
++    開獎後 partial_fit 新的完整 49 列。interval=5 表示累積五期後才更新；None
++    表示完全固定。這不是反覆求解完整 batch MLE，輸出中明確標為 online-SGD。
++    """
++    if first_target < 1 or first_target >= len(data):
++        raise ValueError("first_target 超出範圍")
++    if retrain_interval is not None and retrain_interval < 1:
++        raise ValueError("retrain_interval 必須為正整數或 None")
++    grouped = {int(target): frame.sort_values("number") for target, frame in feature_data.groupby("target_index", sort=True)}
++    available = set(grouped)
++    targets = [target for target in range(first_target, len(data)) if target in available]
++    if not targets:
++        raise ValueError("指定範圍沒有可評估期")
++    initial = feature_data[feature_data["target_index"] < first_target]
++    if initial.empty:
++        raise ValueError("第一個預測期以前沒有訓練資料")
++    # alpha 與 C 的映射事前固定，只用於敏感度；不以外層結果調整。
++    alpha = 1.0 / (max(float(c), 1e-9) * max(len(initial), 1))
++    model = SGDClassifier(
++        loss="log_loss", penalty="l2", alpha=alpha, max_iter=200,
++        tol=1e-5, random_state=seed, shuffle=False, average=True,
++    )
++    model.fit(_online_design(initial, feature_columns, include_number), initial["target"].to_numpy())
++    pending: list[pd.DataFrame] = []
++    prediction_rows: list[dict[str, Any]] = []
++    number_rows: list[dict[str, Any]] = []
++    metadata: list[dict[str, Any]] = []
++    last_update_target = first_target
++    for offset, target in enumerate(targets):
++        test = grouped[target]
++        raw = model.predict_proba(_online_design(test, feature_columns, include_number))[:, 1]
++        probabilities = normalize_and_shrink_probabilities(raw, shrink_strength)
++        actual = data.iloc[target][NUMBER_COLUMNS].to_numpy(dtype=int)
++        scored = score_one_draw(probabilities, actual)
++        version = f"{MODEL_VERSION}-online-SGD-r{retrain_interval or 'fixed'}"
++        prediction_rows.append({
++            "target_index": target, "draw_id": str(data.iloc[target]["draw_id"]),
++            "draw_date": pd.Timestamp(data.iloc[target]["draw_date"]).date().isoformat(),
++            "actual_numbers": " ".join(map(str, sorted(actual.tolist()))),
++            **{key: (" ".join(map(str, value)) if isinstance(value, list) else value) for key, value in scored.items()},
++            "train_start_date": pd.Timestamp(data.iloc[0]["draw_date"]).date().isoformat(),
++            "train_end_date": pd.Timestamp(data.iloc[last_update_target - 1]["draw_date"]).date().isoformat(),
++            "training_draws": last_update_target,
++            "parameters": json.dumps({"C_proxy": c, "shrink_strength": shrink_strength,
++                                        "retrain_interval": retrain_interval, "features": list(feature_columns),
++                                        "include_number": include_number, "seed": seed}, sort_keys=True),
++            "model_version": version,
++        })
++        for number, probability, label in zip(test["number"], probabilities, test["target"]):
++            number_rows.append({"target_index": target, "draw_id": str(data.iloc[target]["draw_id"]),
++                                "number": int(number), "probability": float(probability),
++                                "target": int(label), "model_version": version})
++        pending.append(test)
++        update_now = retrain_interval is not None and ((offset + 1) % retrain_interval == 0)
++        metadata.append({"target_index": target, "draw_id": str(data.iloc[target]["draw_id"]),
++                         "fit_performed_before_prediction": False, "updated_after_outcome": update_now,
++                         "max_training_target": last_update_target - 1, "test_target": target,
++                         "retrain_interval": retrain_interval or 0})
++        if update_now:
++            update = pd.concat(pending, ignore_index=True)
++            model.partial_fit(_online_design(update, feature_columns, include_number), update["target"].to_numpy(), classes=np.array([0, 1]))
++            pending.clear()
++            last_update_target = target + 1
++    return pd.DataFrame(prediction_rows), pd.DataFrame(number_rows), pd.DataFrame(metadata)
++
++
++def fit_latest_recommendation(
++    data: pd.DataFrame,
++    *,
++    min_history: int = 30,
++    c: float = 0.20,
++    shrink_strength: float = 0.10,
++    seed: int = DEFAULT_SEED,
++) -> tuple[list[int], np.ndarray]:
++    """以全部已知歷史訓練後輸出穩定 Top-6 實驗性排序。"""
++    features = build_feature_dataset(data, min_history=min_history)
++    model = make_model(c=c, seed=seed)
++    model.fit(features, features["target"])
++    next_features = build_next_features(data)
++    raw = model.predict_proba(next_features)[:, 1]
++    probabilities = normalize_and_shrink_probabilities(raw, shrink_strength)
++    return stable_top_k(probabilities, 6), probabilities
++
++
++def append_recommendation_history(path: str | Path, record: dict[str, Any]) -> bool:
++    """以 (data_sha256, model_version) 為鍵冪等追加推薦紀錄；已存在則不重寫。"""
++    required = {"data_sha256", "model_version", "numbers"}
++    if not required.issubset(record):
++        raise ValueError(f"推薦紀錄缺少欄位：{sorted(required - set(record))}")
++    numbers = [int(value) for value in record["numbers"]]
++    if len(numbers) != 6 or len(set(numbers)) != 6 or not all(1 <= value <= 49 for value in numbers):
++        raise ValueError("推薦紀錄必須包含六個不重複合法號碼")
++    output = Path(path)
++    existing: list[dict[str, Any]] = []
++    if output.exists():
++        existing = json.loads(output.read_text(encoding="utf-8"))
++        if not isinstance(existing, list):
++            raise ValueError("推薦歷史檔必須是 JSON array")
++    key = (str(record["data_sha256"]), str(record["model_version"]))
++    if any((str(item.get("data_sha256")), str(item.get("model_version"))) == key for item in existing):
++        return False
++    output.parent.mkdir(parents=True, exist_ok=True)
++    existing.append({**record, "numbers": sorted(numbers)})
++    output.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
++    return True
++
++
++def _cli() -> int:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--data", default="data/processed/lotto649.csv")
++    parser.add_argument("--seed", type=int, default=DEFAULT_SEED)
++    args = parser.parse_args()
++    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
++    data = load_lotto_data(args.data)
++    features = build_feature_dataset(data, min_history=30)
++    summary, _, _, _ = evaluate_model(features, data, test_ratio=0.20, seed=args.seed)
++    numbers, _ = fit_latest_recommendation(data, seed=args.seed)
++    print(f"資料截止日期：{pd.Timestamp(data.iloc[-1]['draw_date']).date().isoformat()}")
++    print(f"模型版本：{MODEL_VERSION}")
++    print(f"固定 holdout 回測：{summary.prediction_draws} 期；平均命中 {summary.average_hits:.6f}")
++    print(f"理論均勻基準：{UNIFORM_PROBABILITY * 6:.12f} 個；每號機率 {UNIFORM_PROBABILITY:.12f}")
++    print("統計門檻：須以 audit_next_draw/results_summary.json 的多模型修正與完整零假設結果判定")
++    print("推薦證據等級：實驗性排序；未證明提高中獎機率")
++    print("實驗性號碼：" + " ".join(map(str, numbers)))
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(_cli())

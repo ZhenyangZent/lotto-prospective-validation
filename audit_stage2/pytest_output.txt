@@ -1,0 +1,7 @@
+﻿..........................................................               [100%]
+============================== warnings summary ===============================
+.audit_venv\Lib\site-packages\_pytest\cacheprovider.py:469
+  C:\Users\zheny\Music\University\program\彩卷分析\lotto_analysis\.audit_venv\Lib\site-packages\_pytest\cacheprovider.py:469: PytestCacheWarning: could not create cache path C:\Users\zheny\Music\University\program\彩卷分析\lotto_analysis\.pytest_cache\v\cache\nodeids: [WinError 5] 存取被拒。: 'C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\.pytest_cache\\v\\cache'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html

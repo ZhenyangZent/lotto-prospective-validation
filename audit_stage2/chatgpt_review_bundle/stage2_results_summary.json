@@ -1,0 +1,98 @@
+{
+  "data": {
+    "rows": 2148,
+    "start_date": "2007-01-02",
+    "end_date": "2026-06-30",
+    "sha256": "3973dcdc08ae7b96c31b5a4ee4261db501fc9744857e8cc7dd62e9193f50ad34"
+  },
+  "verdicts": {
+    "original_delivery": "C",
+    "original_delivery_verdict": "C－原始交付存在重大可重現性缺陷",
+    "audited_implementation": "B",
+    "audited_implementation_verdict": "B－實作可用，但沒有足夠預測證據",
+    "predictive_evidence": false,
+    "predictive_evidence_verdict": "沒有足夠且同方向的命中與機率 loss 證據",
+    "recommendation_is_experimental": true
+  },
+  "batch_walk_forward": {
+    "prediction_draws": 20,
+    "average_hits": 1.1,
+    "brier": 0.1073699880330933,
+    "log_loss": 0.3713810707562125
+  },
+  "online_walk_forward": {
+    "prediction_draws": 20,
+    "average_hits": 0.75,
+    "brier": 0.1073023781328846,
+    "log_loss": 0.3711050043933018
+  },
+  "uniform": {
+    "average_hits": 0.7346938775510204,
+    "brier": 0.10745522698875468,
+    "log_loss": 0.37177617994345286
+  },
+  "best_model": {
+    "name": "FullFeatureBatchLogistic",
+    "selection_metric": "inner Brier ascending; then inner Log Loss ascending; then fixed simplicity rank",
+    "average_hits": 1.1,
+    "brier": 0.1073699880330933,
+    "log_loss": 0.3713810707562125
+  },
+  "same_pipeline_null": {
+    "runs": 1000,
+    "familywise_hit_p": 0.03396603396603397,
+    "familywise_brier_p": 0.0919080919080919,
+    "familywise_log_loss_p": 0.0919080919080919,
+    "percentile": 96.7,
+    "monte_carlo_ci": [
+      0.0235929279584269,
+      0.04598126446708158
+    ]
+  },
+  "multiple_testing": {
+    "number_of_tested_models": 12,
+    "bonferroni_p": 0.3197205211939204,
+    "holm_p": 0.3197205211939204,
+    "fdr_bh_p": 0.3197205211939205
+  },
+  "previous_draw_features": {
+    "improves_hits": false,
+    "improves_brier": true,
+    "improves_log_loss": true,
+    "supported": false
+  },
+  "gap_feature": {
+    "improves_hits": true,
+    "improves_brier": true,
+    "improves_log_loss": true,
+    "supported": false
+  },
+  "recommendation_stability": {
+    "bootstrap_runs": 1000,
+    "mean_jaccard": 0.2209765894538824,
+    "ci": [
+      0.0,
+      0.5
+    ],
+    "stable_unique_combination": false
+  },
+  "latest_recommendation": {
+    "data_end_date": "2026-06-30",
+    "numbers": [
+      1,
+      5,
+      15,
+      22,
+      27,
+      47
+    ],
+    "evidence_level": "實驗性排序；未證明提高中獎機率"
+  },
+  "bundle": {
+    "path": "C:\\Users\\zheny\\Music\\University\\program\\彩卷分析\\lotto_analysis\\audit_stage2\\chatgpt_review_bundle.zip",
+    "bytes": 0,
+    "sha256": "SELF_REFERENTIAL_USE_EXTERNAL_SUMMARY_OR_SIDECAR",
+    "manifest_files": 0,
+    "validation_passed": true
+  }
+}

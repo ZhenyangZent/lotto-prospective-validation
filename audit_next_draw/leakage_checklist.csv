@@ -1,0 +1,13 @@
+check,status,evidence_or_issue
+target t 特徵僅使用 0..t-1,pass,build_feature_dataset 與 build_next_features 共用 _feature_snapshots；測試修改未來
+counts 更新順序,pass,t-1 觀測先更新，再建 t 快照；t 標籤只在快照後附加
+last_seen/gap off-by-one,pass,上一期出現時 gap=0；前兩期出現時 gap=1
+EWMA 更新順序,pass,預測 t 前最後更新為 t-1
+transition 更新順序,pass,預測 t 僅加入 (t-2)->(t-1)
+recent window 邊界,pass,"cumulative[t]-cumulative[max(0,t-window)]"
+訓練/測試期群組,pass,target_index 為切割單位，49 列不拆散
+scaler/encoder fit 範圍,pass,batch Pipeline 只 fit train；線上特徵已按每期橫截面標準化
+walk-forward 訓練上界,pass,fold_metadata 中 max_training_target < test_target
+收縮強度外層再利用,pass,0.10 事前固定；敏感度全數保存，不據此改主模型
+原始程式逐行稽核,not_executable,next_draw_predictor.py 初始即不存在
+完整 null 中相同 sklearn ML 重訓,partial,"1,000 歷史重建特徵/選模，但未逐期重跑 sklearn Logistic/RF"

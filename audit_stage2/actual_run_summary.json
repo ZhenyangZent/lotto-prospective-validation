@@ -1,0 +1,17 @@
+{
+  "data_rows": 2148,
+  "data_start": "2007-01-02T00:00:00",
+  "data_end": "2026-06-30T00:00:00",
+  "data_sha256": "3973dcdc08ae7b96c31b5a4ee4261db501fc9744857e8cc7dd62e9193f50ad34",
+  "inner_selected_model": "FullFeatureBatchLogistic",
+  "batch_selected_C": 0.01,
+  "latest_numbers": [
+    1,
+    5,
+    15,
+    22,
+    27,
+    47
+  ],
+  "runtime_seconds": 43.1272547999979
+}

@@ -1,0 +1,261 @@
+[
+  {
+    "relative_path": "__init__.py",
+    "bytes": 281,
+    "sha256": "0aa12438cea7694715c11cbd2526f43e4da0cfc92410a15423f6c0e9b9d2cbcc",
+    "file_type": "py",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "batch_walk_forward_predictions.csv",
+    "bytes": 10205,
+    "sha256": "5f4a77c810b5ac55790be87060378bb430a2b65ca394122d8563789411a1bf84",
+    "file_type": "csv",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "commands_executed.txt",
+    "bytes": 484,
+    "sha256": "157d73bfa52de3623a556c115fa47792b57a1fc03be7f2fc9df1ae2dfcb5e444",
+    "file_type": "txt",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "coverage_output.txt",
+    "bytes": 1874,
+    "sha256": "e183a41527670dcda267d443884ff9e9e8aa38e70c073061d8e26fda5d2b7190",
+    "file_type": "txt",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "environment.txt",
+    "bytes": 132,
+    "sha256": "92ecded9986ace2ad5da7a2ae83baac48ec36c1e67fbe7512598465738cb3aab",
+    "file_type": "txt",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "feature_ablation_results.csv",
+    "bytes": 408,
+    "sha256": "69fca5ae5cc7ab66e9ecec045555bf42c949e0c8dae3b4f091451e92fdaa8b36",
+    "file_type": "csv",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "finalize_stage2.py",
+    "bytes": 27941,
+    "sha256": "56af431840be12c4f2af26e85069bcbab0d10e27d1617ce5a274bcb7e21513a3",
+    "file_type": "py",
+    "description": "報告、manifest與ZIP驗證器"
+  },
+  {
+    "relative_path": "fold_metadata.csv",
+    "bytes": 2681,
+    "sha256": "11ca99a876bced08f9a0d785448bc39caffc0990ba82c13e982673f1b7448f60",
+    "file_type": "csv",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "gap_analysis.csv",
+    "bytes": 1270,
+    "sha256": "d7a02d98e4762752120a2dd31478008a19ec33a35d5f1ac167745e739cbfac9b",
+    "file_type": "csv",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "gap_analysis_summary.json",
+    "bytes": 847,
+    "sha256": "769bb60f60491b1363076d659afbe6be1d769e8940dcecce0c3a44d1b7e5b4a1",
+    "file_type": "json",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "inner_model_selection.csv",
+    "bytes": 829,
+    "sha256": "cc1a644bd43f3eecb45126c98885a43d8cfd57b373d8b8d44008fe04e4f916cb",
+    "file_type": "csv",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "limitations.md",
+    "bytes": 644,
+    "sha256": "5fdcfb2ad53c4e7177204b4fd72924164f0f44d4ac9a89e153ff223c351acf60",
+    "file_type": "md",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "lotto649.csv",
+    "bytes": 305351,
+    "sha256": "3973dcdc08ae7b96c31b5a4ee4261db501fc9744857e8cc7dd62e9193f50ad34",
+    "file_type": "csv",
+    "description": "經獨立驗證的大樂透歷史資料"
+  },
+  {
+    "relative_path": "next_draw_predictor_audited.py",
+    "bytes": 29167,
+    "sha256": "addcb0dfd5a0db6b90d36c94a319a0c97b5e42f151652513fe4244cb4eda58ba",
+    "file_type": "py",
+    "description": "第一階段審計版核心"
+  },
+  {
+    "relative_path": "number_selection_frequency.csv",
+    "bytes": 1372,
+    "sha256": "23f4da810c76c13728b5ece23a45659d6e554969597dc466199732c627b9a5d0",
+    "file_type": "csv",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "online_walk_forward_predictions.csv",
+    "bytes": 10268,
+    "sha256": "cc4d887c1fac8a5cd0dfc9d899e812c90a1762f583e9f9ba5b872b987cca05c2",
+    "file_type": "csv",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "per_number_probabilities.parquet",
+    "bytes": 24041,
+    "sha256": "63cfd156e7b902566e12e6c856523090506478eaa83ca3867fd02ed893e4709d",
+    "file_type": "parquet",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "pipeline.py",
+    "bytes": 21196,
+    "sha256": "e1bd4e26907fe72cc053275f7ca4e1877b71cbfdcf09999321894a4350ac7827",
+    "file_type": "py",
+    "description": "第二階段統一流程與null核心"
+  },
+  {
+    "relative_path": "previous_draw_analysis.csv",
+    "bytes": 1813,
+    "sha256": "15104f0cd947bc7546e993187ab00e11da22c81e625fab66332dd7c1eb5ab37b",
+    "file_type": "csv",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "pytest_output.txt",
+    "bytes": 778,
+    "sha256": "85e656ea81ca8ed32ebd62d8767bba66859fcd100cd1b32827e08a100022318d",
+    "file_type": "txt",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "recent50_analysis.csv",
+    "bytes": 5089,
+    "sha256": "57b80c4cc96e455ee7a387fe986a93324217081625ccc260bbd08995a29a89e8",
+    "file_type": "csv",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "recommendation_stability_full.csv",
+    "bytes": 70655,
+    "sha256": "b3ed86840b245898f011a0772e6c26882f96da2b8a46e8d828180a447c58be24",
+    "file_type": "csv",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "recommendation_stability_summary.json",
+    "bytes": 660,
+    "sha256": "ca29c2f5fcfe98fcb485463dcf79477bb2b78e5b7169a7bb69da44a74900e8b5",
+    "file_type": "json",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "reproduce.ps1",
+    "bytes": 433,
+    "sha256": "411646a2d2c3aeb01e58e4b2cf7a1aa2b5d4761ea578eff8ce7d2ed05d4f063f",
+    "file_type": "ps1",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "requirements-lock.txt",
+    "bytes": 798,
+    "sha256": "775f712bad2a4ffa4bd5a3a6e8b78b77e9bf27d06f08c128d10f9877da6c4eef",
+    "file_type": "txt",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "run_stage2.py",
+    "bytes": 28690,
+    "sha256": "3591f693701fb5f56ebab861cf8ee014822a514653e990d1b45761a85387cadb",
+    "file_type": "py",
+    "description": "第二階段分階段執行器"
+  },
+  {
+    "relative_path": "same_pipeline_model_selection_counts.csv",
+    "bytes": 191,
+    "sha256": "e4ee0d5cc57dc4cc387d76333c23d5c43065ccac83bdcd712708b7751ff07f73",
+    "file_type": "csv",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "same_pipeline_null_config.json",
+    "bytes": 855,
+    "sha256": "0196eca7354794a6bcff7e00061606b95e9d5a4fd76165dce63508e829107add",
+    "file_type": "json",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "same_pipeline_null_results.parquet",
+    "bytes": 51610,
+    "sha256": "80fe966eaa43b7f1394a7c462af307fe1b59b0422b5c375d264b6541c9de4b57",
+    "file_type": "parquet",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "same_pipeline_null_summary.json",
+    "bytes": 1046,
+    "sha256": "78c2d46dc3a8ef82b622e367a372ef643d96d95eda94826436e22e9e066e314c",
+    "file_type": "json",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "seeds.json",
+    "bytes": 192,
+    "sha256": "a5b322a19a1b54ddb3ebc91bc46713c0a0b9a406d8edf4d977134ecc9af6c944",
+    "file_type": "json",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "simplified_null_summary.json",
+    "bytes": 521,
+    "sha256": "bb2356374470d045eeac881d6bced5626ba1c9a1575ecd4205ede1a984239d0d",
+    "file_type": "json",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "stage2_audit_report.md",
+    "bytes": 3673,
+    "sha256": "408dffd4cb2b6f6aef8fbcfaef230e12bedd486d4a244daae8e80671cca08191",
+    "file_type": "md",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "stage2_executive_summary.md",
+    "bytes": 937,
+    "sha256": "7e63edce095e136eb9775c183f1c88e816aea811abfbe3e4bdd212e55f8a5f07",
+    "file_type": "md",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "stage2_results_summary.json",
+    "bytes": 2841,
+    "sha256": "acbabc624235092f01efd69e5734b6971da86b65d2b179b85463307a8fb661e7",
+    "file_type": "json",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "unified_model_comparison.csv",
+    "bytes": 4731,
+    "sha256": "9f2b6d2915cf02b770f543eebfce179e224a49b8a2a5e5bc9898ee2d5cd26842",
+    "file_type": "csv",
+    "description": "第二階段複核產物"
+  },
+  {
+    "relative_path": "yearly_stability.csv",
+    "bytes": 908,
+    "sha256": "f79a4c66715dfa9025f4203c2bef36d50dd89b44debfe84eac9baf20c9a28f7d",
+    "file_type": "csv",
+    "description": "第二階段複核產物"
+  }
+]

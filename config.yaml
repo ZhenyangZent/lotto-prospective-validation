@@ -1,0 +1,24 @@
+seed: 20260728
+lottery:
+  name: 大樂透
+  min_number: 1
+  max_number: 49
+  main_numbers: 6
+  ticket_price_twd: 50
+data:
+  start_year: 2007
+  end_year: null
+  api_url: https://api.taiwanlottery.com/TLCAPIWeB/Lottery/ResultDownload
+  raw_dir: data/raw
+  processed_file: data/processed/lotto649.csv
+analysis:
+  recent_windows: [20, 50, 100, 200]
+  alpha: 0.05
+  monte_carlo_iterations: 10000
+  monte_carlo_batch_size: 25
+backtest:
+  min_train_draws: 300
+  bootstrap_iterations: 2000
+  random_baseline_repetitions: 1000
+  max_predictions: null
+  ml_refit_interval: 100

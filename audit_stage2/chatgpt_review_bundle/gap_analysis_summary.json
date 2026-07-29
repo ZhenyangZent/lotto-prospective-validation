@@ -1,0 +1,29 @@
+{
+  "observed_bin_spearman_rho": 0.2380952380952381,
+  "draw_group_permutation_runs": 1000,
+  "permutation_two_sided_p": 0.5784215784215784,
+  "holm_significant_bins": 0,
+  "full": {
+    "model": "FullBatch",
+    "prediction_draws": 20,
+    "average_hits": 1.1,
+    "brier": 0.10736998803309336,
+    "log_loss": 0.3713810707562125
+  },
+  "without_gap": {
+    "model": "FullBatchWithoutGap",
+    "prediction_draws": 20,
+    "average_hits": 0.95,
+    "brier": 0.10737874853102539,
+    "log_loss": 0.3714208064243682
+  },
+  "gap_only": {
+    "model": "GapOnly",
+    "prediction_draws": 20,
+    "average_hits": 0.8,
+    "brier": 0.19218679716784676,
+    "log_loss": 0.7365259009530746
+  },
+  "supported": false,
+  "conclusion": "gap 未呈現經多重修正、置換與共同外層 loss 同時支持的可重複價值。"
+}

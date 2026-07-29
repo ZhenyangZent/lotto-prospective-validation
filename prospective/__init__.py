@@ -1,0 +1,5 @@
+"""第三階段：台灣大樂透前瞻性鎖模驗證。"""
+
+from .config import EXPERIMENT_ID, EXPERIMENT_VERSION, MODEL_VERSION
+
+__all__ = ["EXPERIMENT_ID", "EXPERIMENT_VERSION", "MODEL_VERSION"]
