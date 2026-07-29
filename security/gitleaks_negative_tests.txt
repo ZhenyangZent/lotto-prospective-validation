@@ -1,0 +1,6 @@
+exact_public_commit_line_is_allowed: PASS (exit=0, expected=0)
+secret_in_same_file_is_detected: PASS (exit=1, expected=1)
+secret_in_other_file_is_detected: PASS (exit=1, expected=1)
+non_40_hex_is_not_allowed: PASS (exit=1, expected=1)
+other_high_entropy_field_is_not_allowed: PASS (exit=1, expected=1)
+ALL_GITLEAKS_SCOPE_TESTS_PASSED
