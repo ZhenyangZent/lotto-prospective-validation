@@ -1,0 +1,12 @@
+title = "Lottery prospective evidence Gitleaks configuration"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Public Git commit SHA preserved as V2 remote verification evidence"
+targetRules = ["generic-api-key"]
+condition = "AND"
+paths = ['''^prospective_validation_v2/remote_verification\.json$''']
+regexTarget = "line"
+regexes = ['''^\s*"github_api_commit_sha":\s*"[0-9a-f]{40}",?\s*$''']
