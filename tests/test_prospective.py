@@ -20,6 +20,21 @@ from prospective.model import assert_pre_target_data, fit_predict
 from prospective.official import validate_official_source
 
 
+@pytest.fixture
+def draws() -> pd.DataFrame:
+    """審查 ZIP 中可獨立執行，不依賴專案外部 conftest。"""
+    rows = []
+    for index in range(80):
+        numbers = sorted({((index * 7 + offset * 8) % 49) + 1 for offset in range(6)})
+        while len(numbers) < 6:
+            candidate = (numbers[-1] % 49) + 1
+            if candidate not in numbers: numbers.append(candidate)
+        rows.append({"draw_id": str(100000000 + index),
+                     "draw_date": pd.Timestamp("2020-01-01") + pd.Timedelta(days=index * 3),
+                     **{f"number_{i + 1}": value for i, value in enumerate(sorted(numbers))}})
+    return pd.DataFrame(rows)
+
+
 def _event(event_id: str) -> dict:
     return {"event_id": event_id, "event_type": "test", "payload": event_id}
 

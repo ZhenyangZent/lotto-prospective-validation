@@ -1,0 +1,18 @@
+{
+  "analysis": null,
+  "generated_at": "2026-07-29T13:14:00+08:00",
+  "notice": "未達預註冊分析點；僅提供描述性進度，不作正式顯著性結論。",
+  "status": {
+    "completed_prospective_draws": 0,
+    "formal_interim_conclusion": "PROHIBITED_BEFORE_PREREGISTERED_ANALYSIS_POINT",
+    "latest_commit": "1b517e01d015c7168e63af13527e433e8133937f",
+    "ledger_valid": true,
+    "mean_brier_difference": null,
+    "mean_hits_top6": null,
+    "mean_log_loss_difference": null,
+    "next_formal_analysis_point": 100,
+    "pending_draws": [
+      "115000075"
+    ]
+  }
+}
