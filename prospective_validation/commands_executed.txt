@@ -8,3 +8,9 @@ python -m prospective.verify_ledger
 python -m prospective.status
 python -m prospective.report
 python -m prospective.export_review_bundle
+python prospective_validation/finalize_bundle_artifact.py
+python -m prospective.export_review_bundle --verify-only prospective_validation/prospective_setup_review.zip
+pytest -q  # executed again from an extracted review bundle
+python verify_ledger_snapshot.py  # executed from extracted review bundle
+python reproduce_prediction.py  # executed from extracted review bundle
+python verify_manifest.py .  # executed from extracted review bundle
