@@ -47,11 +47,21 @@ print(verify_ledger("ledger.jsonl", "ledger_head.json"))
 
 REPRODUCE_PS1 = r'''$ErrorActionPreference='Stop'
 python -m venv .venv
-.\.venv\Scripts\python -m pip install -r requirements-lock.txt
-.\.venv\Scripts\python -m pytest -q
-.\.venv\Scripts\python verify_ledger_snapshot.py
-.\.venv\Scripts\python reproduce_prediction.py
-.\.venv\Scripts\python verify_manifest.py .
+if ($LASTEXITCODE -ne 0) { throw 'venv creation failed' }
+if (Test-Path '.\.venv\Scripts\python.exe') { $bundlePython = '.\.venv\Scripts\python.exe' }
+elseif (Test-Path '.\.venv\bin\python.exe') { $bundlePython = '.\.venv\bin\python.exe' }
+elseif (Test-Path '.\.venv\bin\python') { $bundlePython = '.\.venv\bin\python' }
+else { throw 'venv Python executable not found' }
+& $bundlePython -m pip install -r requirements-lock.txt
+if ($LASTEXITCODE -ne 0) { throw 'dependency installation failed' }
+& $bundlePython -m pytest -q
+if ($LASTEXITCODE -ne 0) { throw 'pytest failed' }
+& $bundlePython verify_ledger_snapshot.py
+if ($LASTEXITCODE -ne 0) { throw 'ledger verification failed' }
+& $bundlePython reproduce_prediction.py
+if ($LASTEXITCODE -ne 0) { throw 'prediction reproduction failed' }
+& $bundlePython verify_manifest.py .
+if ($LASTEXITCODE -ne 0) { throw 'manifest verification failed' }
 '''
 
 
