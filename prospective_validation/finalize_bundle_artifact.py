@@ -55,7 +55,7 @@ elseif (Test-Path '.\.venv\bin\python') { $bundlePython = '.\.venv\bin\python' }
 else { throw 'venv Python executable not found' }
 & $bundlePython -m pip install -r requirements-lock.txt
 if ($LASTEXITCODE -ne 0) { throw 'dependency installation failed' }
-& $bundlePython -m pytest -q
+& $bundlePython -m pytest -q --basetemp .pytest-tmp
 if ($LASTEXITCODE -ne 0) { throw 'pytest failed' }
 & $bundlePython verify_ledger_snapshot.py
 if ($LASTEXITCODE -ne 0) { throw 'ledger verification failed' }
