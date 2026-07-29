@@ -79,3 +79,5 @@ try {
     worktree_exit_code = $worktree
     negative_tests = "ALL_GITLEAKS_SCOPE_TESTS_PASSED"
 } | ConvertTo-Json
+
+exit 0
