@@ -1,0 +1,48 @@
+{
+  "content": {
+    "nextDrawDateList": [
+      {
+        "drawDate": "20260731",
+        "drawTerm": 115000075,
+        "gameCode": 5118
+      },
+      {
+        "drawDate": "20260730",
+        "drawTerm": 115000061,
+        "gameCode": 5134
+      },
+      {
+        "drawDate": "20260729",
+        "drawTerm": null,
+        "gameCode": 5120
+      },
+      {
+        "drawDate": "20260731",
+        "drawTerm": null,
+        "gameCode": 1121
+      },
+      {
+        "drawDate": "20260729",
+        "drawTerm": null,
+        "gameCode": 1197
+      },
+      {
+        "drawDate": "20260729",
+        "drawTerm": null,
+        "gameCode": 2108
+      },
+      {
+        "drawDate": "20260729",
+        "drawTerm": null,
+        "gameCode": 2109
+      },
+      {
+        "drawDate": "202607291315",
+        "drawTerm": null,
+        "gameCode": 1102
+      }
+    ]
+  },
+  "rtCode": 0,
+  "rtMsg": null
+}

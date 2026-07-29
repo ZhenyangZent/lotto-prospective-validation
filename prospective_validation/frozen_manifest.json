@@ -1,0 +1,31 @@
+{
+  "config_sha256": "e92dd44de1031c3b479395b129271d38357d23daf69d9c5c1f5b87262b72b182",
+  "data_end_draw_id": "115000074",
+  "data_sha256_at_freeze": "b07017b0077fc458c8046aaf0370620277adcc46110928d477884e57768a972e",
+  "experiment_id": "TW649-PROSPECTIVE-20260729-V1",
+  "experiment_version": "1.0.0",
+  "first_prospective_draw": {
+    "draw_date": "2026-07-31",
+    "draw_id": "115000075"
+  },
+  "frozen_at": "2026-07-29T13:12:26+08:00",
+  "source_code_sha256": "8481bfe5b75cf7286a0451c865b886861dda001d4a3998ecef8d1402d6a4ea0a",
+  "source_files": {
+    "next_draw_predictor_audited.py": "addcb0dfd5a0db6b90d36c94a319a0c97b5e42f151652513fe4244cb4eda58ba",
+    "prospective/__init__.py": "9fef5d506498e6c6482e47dd68c720d8656a2bb12edce969df4ce9f47562d55e",
+    "prospective/canonical.py": "f1d724cec283be05fa78bec4cfe26ff7109c9f20db224dc1e7553957b8980a6d",
+    "prospective/config.py": "5c31a42ff2b5c115c1b038d5ff0386f5a6ffaad8ae7dd726d9b5458b844cb48c",
+    "prospective/export_review_bundle.py": "200a10a8750bcdc9afd6684e22eb62be754254f3687dacbd662a96158ec5cb03",
+    "prospective/freeze_experiment.py": "7cba867300fb3cdf291d2fe9bd1180dd2d0a3d8263a4b783a9e86638d4301d53",
+    "prospective/gitops.py": "9a51bb8379f473735c2e1013fcfbf8bb774f55fa9fb3bc301aa04639c03f51e4",
+    "prospective/ingest_result.py": "960fb834587095377fd0c3db8f9a3b7ba6e52047b5179aedd81e7962cd728123",
+    "prospective/metrics.py": "944c3d78153f0dec3e80925bf138034f183b6149cfaf33bd6ff7cd47947da331",
+    "prospective/model.py": "ee0aa89ca1ee72f13daf3e9411c1313819cde656082d350eae3c2eed2cd56a2b",
+    "prospective/official.py": "52c3383d95e685749bfe7959a39ddefcabb7277a5b56270e736c7a24bd892d1d",
+    "prospective/predict_next.py": "d54b66337bbea267b8c435f856a549fa4afdd317a764d9e1627b1f9199ccd4ce",
+    "prospective/report.py": "4f943bec7514cca4e6d02c13697cb730a36c932f153d810701fdc1f71e71bbfb",
+    "prospective/status.py": "ce3a74bde3720b0ef4346a61edb1a9b13a6f75935718fcad230f3ba03e33e225",
+    "prospective/verify_ledger.py": "f41f3304df5b11086d8809a902c89dd600e3a444728a606c7b48bc4344e73b35",
+    "prospective/workflow.py": "37d2c845a400d6433c4f48c84d5112d59666488ca0e63a9957c74fb4e0f0ea7d"
+  }
+}
