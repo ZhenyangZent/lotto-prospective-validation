@@ -1,0 +1,5 @@
+........................................................................ [ 73%]
+..........................                                               [100%]
+98 passed, 1 warning in 11.24s
+
+The warning is limited to an unavailable pytest cache directory and does not affect test execution.

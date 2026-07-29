@@ -1,0 +1,17 @@
+gh auth status
+git status --short
+git remote -v
+gh repo create ZhenyangZent/lotto-prospective-validation --public --source . --remote origin
+git push -u origin HEAD
+git push origin --tags
+git ls-remote origin HEAD
+git ls-remote --tags origin
+python -m pytest -q tests/test_prospective_v2.py
+python -m pytest -q
+python -m pytest --cov=prospective_v2 --cov-report=term-missing
+python -m prospective_v2.freeze_experiment
+python -m prospective_v2.predict_next --draw-id <official-next> --draw-date <official-date>
+python -m prospective_v2.verify_ledger
+python -m prospective_v2.status
+python -m prospective_v2.export_review_bundle
+git bundle verify prospective_validation_v2/prospective-v2-history.bundle

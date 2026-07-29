@@ -15,3 +15,5 @@ reports/tables/*.csv
 reports/results.json
 
 prospective_validation/prospective_setup_review.zip
+prospective_validation_v2/prospective_v2_setup_review.zip
+prospective_validation_v2/full-reproduce-*/
